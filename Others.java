@@ -38,5 +38,10 @@ public class Others {
 	return _careBearLvl;
     }
     
+    public boolean voteLegis (String tactics; Legislation action; Event lastEvent) {
+    	//checks depending variables, if they concur, then the bill passes, if not it fails
+    	return false;
+    }
+    
     
     
