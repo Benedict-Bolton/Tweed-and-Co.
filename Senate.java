@@ -13,9 +13,9 @@ public class Senate extends Others{
 	setCompLeft(0.45);
 	setHawks(45);
 	setBears(40);
-
-	
+	setAveInc(450000);
     }
+    
     
     
     

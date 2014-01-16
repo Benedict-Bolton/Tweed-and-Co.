@@ -10,6 +10,7 @@ public class Others {
     //Composition, vars must add to 100% ALWAYS
     private double _percentCompRight;
     private double _percentCompLeft;
+
     
     //Voting Factors (all uncapped)
     private long _averageIncome; //tied to all domestic events
@@ -70,10 +71,37 @@ public class Others {
 	return old;}
 
     //METHODS
-    public boolean voteLegis (String tactics; Legislation action; Event lastEvent) {
-    	//checks depending variables, if they concur, then the bill passes, if not it fails
-    	return false;
+    public double voteLegis (String tactics, Legislation bill, Event lastEvent, String proposedBy) {
+    	//checks depending variables, 
+	//calculates a percentage of support for the Legislation
+	//based on 
+	//bill proposed by one side gets 30% approval from that side
+	//extremism 
+    	double support = 0.0;
+	double percentLeft = _percentCompLeft;
+	double percentRight = _percentCompRight;
+	
+	if(proposedBy.equals("Republican")){
+	    support+=percentRight*0.3;
+	    percentRight*=0.7;
+	}
+	else if(proposedBy.equals("Democrat")){
+	    support+=percentLeft*0.3;
+	    percentLeft*=0.7;
+	}
+
+	if(bill.getEcon() == 0){ //populist
+	    double temp = percentLeft*_extremismLeft*0.3;
+	    support+=temp;
+	    percentLeft-=temp;
+	}
+	else if(bill.getEcon() == 1){ //trickle-down
+	    double temp = percentRight*_extremismRight*0.3;
+	    support+=temp;
+	    percentRight-=temp;
+	}
+	
+	return support;
     }
-    
-    
-    
+
+}
