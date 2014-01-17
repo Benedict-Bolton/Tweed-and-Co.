@@ -5,10 +5,14 @@ public class State extend Others{
     String[] blueStates = {"Maine","New York","Massachussetts","Connecticut",
 			   "Rhode Island","Pennsylvania","Virginia",
 			   ""};
-    String stateName; 
+    String stateName;
+    
     public State(stateName){
-	if 
-
+	if (blueStates.indexOf(stateName) > -1){
+	    
+	    
+	}
+	
 
     }
 
