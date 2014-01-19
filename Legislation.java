@@ -24,8 +24,11 @@ public class Legislation {
     private int socialType;
     // 0 = Libertarians (0% regulation) , 1 = Left-Leaning, 2 = Right-Leaning, 3 = Fascist (100% regulation), -1 = None of the Above
     
+    public int position;
+    
     public Legislation () {
 	int randChoice = (int) Math.random() * 25;
+	position = randChoice;
 	text = TEXT_REFERENCE[ POS_BILLS[randChoice][0] ];
 	propParty = POS_BILLS[randChoice][1];
 	porkBarrel = POS_BILLS[randChoice][2];
@@ -35,6 +38,47 @@ public class Legislation {
 	economicsType = POS_BILLS[randChoice][6];
 	socialType = POS_BILLS[randChoice][7];
 	
+    }
+    
+    //overriding the good ole' to String (faster than writing out the designations for each bill
+    public String toString () {
+	String ans = "";
+	ans += "Text of Legislation -- " + text + "\n";
+	ans += "Party that Proposed the Legislation: ";
+	if (propParty == 0) { ans += "Republicans"; }
+	else { ans += "Democrats"; }
+	ans += "\n"; 
+	ans += "Does this Bill allocate Pork-Barrel spending for your State?: ";
+	if (porkBarrel == 0) { ans += "No"; }
+	else { ans += "Yes"; }
+	ans += "\n";
+	ans += "Does this bill raise your salary for no reason?: ";
+	if (selfEnrichment == 0) { ans += "Nope, :("; }
+	else { ans += "Aww Yisss"; }
+	ans += "\n";
+	ans += "Does this Bill help fudge elections to help you get relected?: ";
+	if (gerryMandering == 0) { ans += "No"; }
+	else { ans += "Yes"; }
+	ans += "\n";
+	ans += "Foreign Policy Ideology Pursued by the Bill: ";
+	if (foreignType == 0) { ans += "Interventionalism"; }
+	else if (foreignType == 1) { ans += "Internationalism"; }
+	else if (foreignType == 2){ ans += "Isolationism"; }
+	else {ans += "This Bill is largely independant of any Foreign Policy Ideology";}
+	ans += "\n"
+	ans += "Economic Policy Pursued by the Bill: ";
+	if (economicsType == 0) { ans += "Populism"; }
+	else if (economicsType == 1) { ans += "Supply-Side Economics"; }
+	else if (economicsType == 2) { ans += "Modernization"; }
+	else {ans += "This Bill is largely independant of any defined Economic Policy";}
+	ans += "\n"
+	ans += "Overall this bill might be deemed by society as: ";
+	if (socialType == 0) { ans += "Libertarian"; }
+	else if (socialType == 1) { ans += "Left-Leaning"; }
+	else if (socialType == 2) { ans += "Right-Leaning"; }
+	else if (socialType == 3) { ans += "Fascist"; }
+	else {ans += "This is one of those rare bills that is simultaneously adored by every politician, and hated by every citizen, thus defiying classification";}
+	return ans;
     }
 
     //accessors
@@ -61,6 +105,9 @@ public class Legislation {
     }
     public String getText() {
 	return text;
+    }
+    public int getPosition () {
+	return position;
     }
     
     public void populateText () {
