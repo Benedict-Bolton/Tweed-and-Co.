@@ -27,9 +27,10 @@ public class Legislation {
     public int position;
     
     public Legislation () {
-	int randChoice = (int) Math.random() * 25;
+	int randChoice = (int) (Math.random() * 25);
+	populateText();
 	position = randChoice;
-	text = TEXT_REFERENCE[ POS_BILLS[randChoice][0] ];
+	text = TEXT_REFERENCE[ (POS_BILLS[randChoice][0]) ];
 	propParty = POS_BILLS[randChoice][1];
 	porkBarrel = POS_BILLS[randChoice][2];
 	selfEnrichment = POS_BILLS[randChoice][3];
@@ -46,7 +47,8 @@ public class Legislation {
 	ans += "Text of Legislation -- " + text + "\n";
 	ans += "Party that Proposed the Legislation: ";
 	if (propParty == 0) { ans += "Republicans"; }
-	else { ans += "Democrats"; }
+	else if (propParty == 1) { ans += "Democrats"; }
+	else {ans += "This Bill was Proposed by a Bipartisan group of Senators, Its a Miracle!"; }
 	ans += "\n"; 
 	ans += "Does this Bill allocate Pork-Barrel spending for your State?: ";
 	if (porkBarrel == 0) { ans += "No"; }
@@ -65,13 +67,13 @@ public class Legislation {
 	else if (foreignType == 1) { ans += "Internationalism"; }
 	else if (foreignType == 2){ ans += "Isolationism"; }
 	else {ans += "This Bill is largely independant of any Foreign Policy Ideology";}
-	ans += "\n"
+	ans += "\n";
 	ans += "Economic Policy Pursued by the Bill: ";
 	if (economicsType == 0) { ans += "Populism"; }
 	else if (economicsType == 1) { ans += "Supply-Side Economics"; }
 	else if (economicsType == 2) { ans += "Modernization"; }
 	else {ans += "This Bill is largely independant of any defined Economic Policy";}
-	ans += "\n"
+	ans += "\n";
 	ans += "Overall this bill might be deemed by society as: ";
 	if (socialType == 0) { ans += "Libertarian"; }
 	else if (socialType == 1) { ans += "Left-Leaning"; }
@@ -136,6 +138,12 @@ public class Legislation {
 	TEXT_REFERENCE[22] = "A Bill to Rennovate US Infrastructure and Roads:\n Upon the circumstance....ugh another one of these 500+ page bills that do nothing, just a bunch of conlicting qualifications, loop-holes, and mandates that, while they satisfy each party enough to get the bill passed, make this bill do effectively nothing, thanks to their contradictory effects, to solve the very real problem this bill tries to fix. My state is going to be pissed at me for not pushing the other side to pass what they want to fix it, but that was not possible, and at least this bill does a little something. The people are too stupid, they can't see the bigger picture, and now I lose my job because of it....if only I could placate them....well people always like jobs....hmmm I can slip in a couple million in spnending for my state right within the loopholes for roads between buildings inside chemical production plants in Oklahoma. Hey it will jump up the deficit, but at least it lets me keep my job when I've done nothing wrong.";
 	TEXT_REFERENCE[23] = "A Bill to Ensure the Proper Districting of Congressional Districts:\n The proper drawing of districts can have a huge effect on the ability of government officials to be reelected, yet regulations and oversight over this process gets in the way of state legislators exercising the will of the people. Thus from hence forth the regulations on the drawing of congressional districts shall be reduced enabling more freedom in this drawing. This practice will be referred to as gerrymandering in future debates.";
 	TEXT_REFERENCE[24] = "Rid the Nation of Voter Fraud:\n New more extensive voter registration laws shall be implemented across the United States to prevent voter fraud so that the outcome of elections can be ensured to be honest. The nature and implementation of these new laws shall be determined by the Senators from each state as they fully represent their whole state and thus have the most knowledge and connections for implementation about and throughout their state."; 
+    }
+    
+    
+    public static void main (String[] args) {
+	Legislation test = new Legislation();
+	System.out.println(test);
     }
     	
 }
