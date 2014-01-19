@@ -1,19 +1,13 @@
-public class State extend Others{
+public class State extends Others{
     
     //Instance Vars
     String[] redStates = {"Texas","",""};
     String[] blueStates = {"Maine","New York","Massachussetts","Connecticut",
 			   "Rhode Island","Pennsylvania","Virginia",
 			   ""};
-    String stateName;
+    String _stateName;
     
-    public State(stateName){
-	if (blueStates.indexOf(stateName) > -1){
-	    
-	    
-	}
-	
+    public State(String stateName){
 
     }
-
 }
