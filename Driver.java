@@ -48,7 +48,7 @@ public class Driver {
 		}
 		Legislation freshBill = new Legislation(); 
 		System.out.println(freshBill);
-		int powerSource = (int) Math.random() * 3;
+		int powerSource = (int) (Math.random() * 3);
 		if (powerSource == 0) {
 		    System.out.println("\n\n All the other Senators stare at that perfectly Hairsprayed hair of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.");
 		}
