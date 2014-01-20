@@ -3,7 +3,7 @@ public class Event{
     private final String[][] EVENTS = new String[20][5];
     
     private String _text;
-    private String[] _options = String[4];
+    private String[] _options = new String[4];
     private String _type; 
     
     //pre: String type == Domestic || Foreign
@@ -26,12 +26,37 @@ public class Event{
 	ans += "There has been another event risen around the world -- " + _text + "\n";
 	ans += "The options available to you to resolve this crisis are as follows:\n";
 	for (int op = 0; op < _options.length; op++) {
+	    ans += op + " --> ";
 	    ans += _options[op];
 	    ans += "\n";
 	}
 	return ans;
     }
+    
+    //pre: these are how the world changes based on the option chosen for the event (they all do the same as now, yes it is predictable, but they will need to learn the pattern quickly
+    public static int[] changeResult (Public usa, int worldStable, int choice) {
+	int[] newStuff = new int[2];
+	if (choice == 0) {
+	    newStuff[0] = -(usa.getAveInc() * 0.10);
+	    newStuff[1] = 0;
+	}
+	else if (choice == 1) {
+	    newStuff[0] = -(usa.getAveInc() * 0.10);
+	    newStuff[1] = 10;
+	}
+	else if (choice == 2) {
+	    newStuff[0] = 0;
+	    newStuff[1] = 5;
+	}
+	else {
+	    newStuff[0] = -(usa.getAveInc() * 0.10);
+	    newStuff[1] = 10;
+	}
+	return newStuff;
+    }
 
+
+	
     public void initializeEvents () {
 	EVENTS[0][0] = "Central Asia is again having issues of oppression and murder it seems, I suppose it is Tuesday after all. The Tajik majority in Tajikistan is forcing the migration of minority Uzbek's into camps outside the cities, these camps have very few facilities and many who are sick or injured are dying in the process. While the US can intervene and save lives, the US can also save a lot of money by being granted free access for military supplies through Tajikistan's strategically important roads.";
 	//repsonses
@@ -65,4 +90,10 @@ public class Event{
 	EVENTS[3][4] = "I do believe its time those freed slaves, and their assets, be re-united with their homeland. A large 'Peace-Keeping' force will be sent to Liberia holding major cities, and most importantly the diamond mines, until fair elections may be held. That will of course be determined by the US.";
 
 
-} 
+    }
+    
+    public static void main (String[] args) {
+	Event test = new Event("Foreign");
+	System.out.println(test);
+    }
+}
