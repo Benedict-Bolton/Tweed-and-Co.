@@ -12,11 +12,9 @@ public class Event{
 	_type = type;
 	if (type.equals("Foreign")) {
 	    int eventPlace = (int) (Math.random() * 4);
-	    if (eventPlace = 0) {
-		_text = EVENTS[eventPlace][0];
-		for(int c = 1; c < EVENTS[eventPlace].length; c++) {
-		    _options[c-1] = EVENTS[eventPlace][c];
-		}
+	    _text = EVENTS[eventPlace][0];
+	    for(int c = 1; c < EVENTS[eventPlace].length; c++) {
+		_options[c-1] = EVENTS[eventPlace][c];
 	    }
 	}
     }
@@ -24,21 +22,26 @@ public class Event{
     public String toString() {
 	String ans = "";
 	ans += "There has been another event risen around the world -- " + _text + "\n";
-	ans += "The options available to you to resolve this crisis are as follows:\n";
+	ans += "The options available to you to resolve this crisis are as follows:\n\n";
 	for (int op = 0; op < _options.length; op++) {
 	    ans += op + " --> ";
 	    ans += _options[op];
-	    ans += "\n";
+	    ans += "\n\n";
 	}
 	return ans;
     }
     
     //pre: these are how the world changes based on the option chosen for the event (they all do the same as now, yes it is predictable, but they will need to learn the pattern quickly
-    public static int[] changeResult (Public usa, int worldStable, int choice) {
-	int[] newStuff = new int[2];
+    public static double[] changeResult (Public usa, double worldStable, int choice) {
+	double[] newStuff = new double[2];
 	if (choice == 0) {
 	    newStuff[0] = -(usa.getAveInc() * 0.10);
-	    newStuff[1] = 0;
+	    if (worldStable < 5) {
+		newStuff[1] = -(worldStable);
+	    }
+	    else {
+		newStuff[1] = -5;
+	    }
 	}
 	else if (choice == 1) {
 	    newStuff[0] = -(usa.getAveInc() * 0.10);
@@ -49,7 +52,7 @@ public class Event{
 	    newStuff[1] = 5;
 	}
 	else {
-	    newStuff[0] = -(usa.getAveInc() * 0.10);
+	    newStuff[0] = (usa.getAveInc() * 0.10);
 	    newStuff[1] = 10;
 	}
 	return newStuff;
@@ -74,7 +77,7 @@ public class Event{
 	EVENTS[1][4] = "US Air Strikes will be carried out against Kabul, Kandahar, and other major Taliban positions, so that other warlords may seize control. We will then be able to extort free trade from the next warlord as payment not to bomb them. Just wait for the first McDonalds in Kabul...it will be wonderful.";
 
 
-	EVENTS[2][0] = "The US embassies in Yemen and Sudan have been bombed by Al-Qaeda militants. This necessatates a response, but what respect fro traditional American liberties should be maintained against these men who have no respect for these very liberties, or the lives they were made to protect?";
+	EVENTS[2][0] = "The US embassies in Yemen and Sudan have been bombed by Al-Qaeda militants. This necessatates a response, but what respect for traditional American liberties should be maintained against these men who have no respect for these very liberties, or the lives they were made to protect?";
 	//repsonses
 	EVENTS[2][1] = "US Military advisors and Special Forces will be deployed to these coutnries to gain the information to hunt down and kill the culprits. In adddition US aid will be sent to rural communities to undermine and destroy support for Al-Qaeda.";
 	EVENTS[2][2] = "Liberties? Respecting them? These terrorists ain't no US citizens, and anyone who supports them are traitors along with them. We'll bribe the local governments and use some Tomahawks to make sure any place they possibly could be does exist anymore. That will teach them.";
