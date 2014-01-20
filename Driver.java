@@ -31,7 +31,7 @@ public class Driver {
 	boolean elected = true;
 	while (elected) {
 	    int worldStability; //higher lowers all financial indicators of public, keep it down,
-	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same.
+	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
 	    boolean legislationActive;
 	    int passageBill = 0; 
 	    //0 = nothing done yet, 
@@ -48,7 +48,7 @@ public class Driver {
 		if ( (passageBill == 1) || (passageBill == 2) || (passagebill == 3) ) {
 		    break;
 		}
-		Legislation freshBill = new Legislation(); 
+ 		Legislation freshBill = new Legislation(); 
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
 		int powerSource = (int) (Math.random() * 3);
