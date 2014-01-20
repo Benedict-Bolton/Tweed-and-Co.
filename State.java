@@ -91,7 +91,7 @@ public class State extends Others{
     //indicates the State's happiness with a Player parameter
     //returns a double (a %)
     public double popularity(Player player){
-	
+	return 0.0;//awaiting implementation
     }
 
     //returns the majority party in this state

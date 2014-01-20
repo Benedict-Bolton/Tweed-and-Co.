@@ -21,7 +21,7 @@ public class Driver {
     public static State generateState(){	
 	boolean trigger = true;
 	String ans = "";
-	State homeState;
+	State homeState = new State();
 	while(trigger){
 	    System.out.println("\nYou are a venerable U.S. Senator from which state? \n(Remember to Capitalize the First Letter)");
 	    ans = Keyboard.readString();
