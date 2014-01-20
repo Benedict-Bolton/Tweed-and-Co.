@@ -5,15 +5,16 @@ public class State extends Others{
     String[] _redStates = {"Washington","Montana","Idaho","Wyoming","South Dakota","Nebraska","Kansas","Iowa","Nevada","Utah","Arizona","Alaska","Colorado","New Mexico","Oklahoma","Louisiana","Mississippi","Alabama","Florida","Georgia","South Carolina","Tennessee","Kentucky","Indiana","Ohio","New Hampshire","New Jersey","Delaware"};
     String[] _bluStates = {"Maine","New York","Massachussetts","Connecticut","Rhode Island","Pennsylvania","Virginia","Vermont","Maryland","West Virginia","North Carolina","Michigan","Wisconsin","North Dakota","Minnesota","Illinois","Missouri","Arkansas","Texas","California","Oregon","Hawaii"};
     String _stateName;
+    int redIndex=-1;
+    int bluIndex=-1;
     
+    //constructor
     public State(String stateName) throws Exception{
-	int redIndex=-1;
-	int bluIndex=-1;
-	for(int i=0; i<_bluStates.length; i++){
+	for(int i=0; i<_bluStates.length(); i++){
 	    if (_bluStates[i].equals(stateName)){
 		bluIndex = i;}
 	}
-	for(int i=0; i<_redStates.length; i++){
+	for(int i=0; i<_redStates.length(); i++){
 	    if (_redStates[i].equals(stateName)){
 		redIndex = i;}
 	}
@@ -57,5 +58,24 @@ public class State extends Others{
 	s+="\n\tThe people's bleeding-heart charity for the world: "+getBears()+"%";
 	s+="\n\tThe average household's income: $"+getAveInc();
 	return s;
+    }
+
+    //indicates the State's happiness with a Player parameter
+    //returns a double (a %)
+    public double popularity(Player player){
+	
+    }
+
+    //returns the majority party in this state
+    //0=republicans, 1=democrats
+    public int getMajority(){
+	if(_percentCompRight > 0.5){return 0;}
+	else if(_percentCompLeft > 0.5){return 1;}
+	else{return (int)(Math.random*2.0);}
+    }
+
+    //returns the name of this state
+    public String getName(){
+	return _stateName;
     }
 }//end class
