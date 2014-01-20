@@ -22,12 +22,20 @@ public class Event{
     }
     
     public String toString() {
-	ans += 
+	String ans = "";
+	ans += "There has been another event risen around the world -- " + _text + "\n";
+	ans += "The options available to you to resolve this crisis are as follows:\n";
+	for (int op = 0; op < _options.length; op++) {
+	    ans += _options[op];
+	    ans += "\n";
+	}
+	return ans;
+    }
 
     public void initializeEvents () {
 	EVENTS[0][0] = "Central Asia is again having issues of oppression and murder it seems, I suppose it is Tuesday after all. The Tajik majority in Tajikistan is forcing the migration of minority Uzbek's into camps outside the cities, these camps have very few facilities and many who are sick or injured are dying in the process. While the US can intervene and save lives, the US can also save a lot of money by being granted free access for military supplies through Tajikistan's strategically important roads.";
 	//repsonses
-	EVENTS[0][1] = "US Marines will be sent to Tajikistan to provide food and protection to the native Uzbek Communities until the situation diffuses";
+	EVENTS[0][1] = "US Marines will be sent to Tajikistan to provide food and protection to the native Uzbek Communities until the situation diffuses.";
 	EVENTS[0][2] = "AMERICA!!! SEND THE TANKS AND AIR FORCE, WE ARE WIPING OUT THAT TAJIKISTAN AND UZEBKISTAN GOVERNMENT (just to be safe) AND DELIVERING A HUGE DOSE OF FREEDOM STRAIGHT FROM OUR CRUISE MISSILES!!!";
 	EVENTS[0][3] = "We are not the World's police, and we have no grand geopolitical conflict to win. This is not our fight, we will raise the issue in the UN so other nations may come together to sove the issue, we cannot lead.";
 	EVENTS[0][4] = "The Uzbeks have nothing to offer us, and we were elected to serve American Citizens, not Tajik Uzbeks. Let's start using those roads and save some money.";
