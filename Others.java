@@ -150,18 +150,12 @@ public class Others {
 	    percentLeft-=temp2;
 	}
 	else if(bill.getForeign() ==2){//isolationist, alienates people who want to get involved
-	    double temp1 = percentRight*_careBearLvl;
-	    percentRight+=temp1;
-	    support-=temp1*0.9;
-	    temp1 = percentRight*_hawkLvl;
-	    support-=temp1*0.9;
-	    percentRight+=temp1;
-	    double temp2 = percentLeft*_careBearLvl; 
-	    percentLeft+=temp2;
-	    support-=temp2*0.9;
-	    temp2= percentLeft*_hawkLvl;
-	    support-=temp2*0.9;
-	    percentLeft+=temp2;
+	    double temp1 = percentRight*(1-_careBearLvl);
+	    support+=temp1;
+	    percentRight-=temp1;
+	    double temp2 = percentLeft*(1-_careBearLvl);
+	    support+=temp2;
+	    percentLeft-=temp2;
 	}
 	//social factors
 	if(bill.getSoc()==0){//libertarian
