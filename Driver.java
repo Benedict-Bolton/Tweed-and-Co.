@@ -29,6 +29,8 @@ public class Driver {
 	System.out.println("=====================================");
 	Senate senate = new Senate(year);
 	System.out.println(senate);
+	System.out.print("Enter anything to proceed  ");
+	String whatever = Keyboard.readString();
 
 	//world-show home state
 	System.out.println("=====================================");
@@ -37,13 +39,23 @@ public class Driver {
 	    System.out.println(homeState);
 	}
 	catch (Exception ex){}
+	System.out.print("Enter anything to proceed  ");
+	whatever = Keyboard.readString();
 	
+	System.out.println("=====================================");
+	Legislation test = new Legislation();
+	System.out.println(test);
+	System.out.println("Senate approval for this bill: "+senate.voteLegis(test));
+	System.out.print("Enter anything to proceed  ");
+	whatever = Keyboard.readString();
 
     }//end generatePlayer
 
     public static void main( String[] args ) {
 	int year = 1996;
 	generateWorld(year);
+
+
 	/*=============================
 	boolean elected = true;
 	boolean censored = false;

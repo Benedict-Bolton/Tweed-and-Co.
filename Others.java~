@@ -27,8 +27,14 @@ public class Others {
     public double getCompRight () {
 	return _percentCompRight;
     }
+    public int getReps() {
+	return (int)(_percentCompRight * 100);
+    }
     public double getCompLeft () {
 	return _percentCompLeft;
+    }
+    public int getDems() {
+	return (int)(_percentCompLeft * 100);
     }
     public long getAveInc () {
 	return _averageIncome;
@@ -39,9 +45,9 @@ public class Others {
     public int getBears () {
 	return _careBearLvl;
     }
-    
+
     //Mutators
-        public double setExRight(double input){
+    public double setExRight(double input){
 	double old = _extremismRight;
 	_extremismRight = input;
 	return old;}
@@ -71,12 +77,15 @@ public class Others {
 	return old;}
 
     //METHODS
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //calculates the votes for a particular Legislation, as a percentage 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public double voteLegis (String tactics, Legislation bill, Event lastEvent, String proposedBy) {
     	//checks depending variables, 
 	//calculates a percentage of support for the Legislation
-	//based on 
+	//based on extremism
 	//bill proposed by one side gets 30% approval from that side
-	//extremism 
+
     	double support = 0.0;
 	double percentLeft = _percentCompLeft;
 	double percentRight = _percentCompRight;
@@ -104,4 +113,20 @@ public class Others {
 	return support;
     }
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //changes the party composition of the Others by a input
+    //ensures the total composition remains at 1 (aka 100%)
+    //by subtracting from the other party.
+    //returns the old value of the composition for that party.
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public double addReps(int input){
+	double toAdd = (double)(input/10.0);
+	setCompLeft(_percentCompLeft-=toAdd);
+	return setCompRight(_percentCompRight+=toAdd);
+    }
+    public double addDems(int input){
+	double toAdd = (double)(input/10.0);
+	setCompRight(_percentCompRight-=toAdd);
+	return setCompLeft(_percentCompLeft+=toAdd);
+    }
 }
