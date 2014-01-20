@@ -10,12 +10,20 @@ public class Driver {
     }
 
     public static Senate generateSenate(int year){
+        //world-create Senate, show Senate
+	System.out.println("=====================================");
+	Senate senate = new Senate(year);
+	System.out.println(senate);
+	delay();
+	return senate;
+    }
+
+    public static State generateState(){	
 	boolean trigger = true;
 	String ans = "";
 	State homeState;
 	while(trigger){
-	    System.out.println("The year is "+year+"\nYou are a venerable U.S. Senator from which state? \n(Remember to Capitalize the First Letter)");
-	    //implement Player generation here
+	    System.out.println("\nYou are a venerable U.S. Senator from which state? \n(Remember to Capitalize the First Letter)");
 	    ans = Keyboard.readString();
 	    try{
 		homeState = new State(ans); //State generation
@@ -27,17 +35,6 @@ public class Driver {
 		System.out.println("Try again. You can't fool the bureaucracy...");
 	    }
 	}
-	//implement delay here
-
-	//create world
-
-        //world-create Senate, show Senate
-	System.out.println("=====================================");
-	Senate senate = new Senate(year);
-	System.out.println(senate);
-	delay();
-
-	//world-show home state
 	System.out.println("=====================================");
 	try{//this try-catch system just to make it past stupid compiler
 	    homeState=new State(ans);
@@ -45,13 +42,19 @@ public class Driver {
 	}
 	catch (Exception ex){}
 	delay();
+	return homeState;
+    }//end generateState
 
-	return senate;
-    }//end generatePlayer
+    public static Player generatePlayer(State homeState){
+	return new Player(homeState);
+    }
 
     public static void main( String[] args ) {
 	int year = 1996;
+	System.out.println("The year is "+year);
 	Senate senate = generateSenate(year);
+	State playerState = generateState();
+	Player player = generatePlayer(playerState);
 	
 
 	/*=============================	
@@ -134,7 +137,7 @@ public class Driver {
 		
 		
 	    }//end while (legislationActive)
-
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`````
 	    boolean eventOccuring = true;
 	    while (eventOccuring) {
 		int eventChoice = (int) (Math.random());
@@ -144,6 +147,7 @@ public class Driver {
 		    System.out.println(currentEvent);
 		    System.out.print("Enter the number of the option you wish to pursue: ");
 		    int responseChoice = Keyboard.readInt();
+ 
 		    double[] response = Event.changeResult (csa,worldStability, responseChoice);
 		    //csa.setIncome(csa.getAveInc() + response[0]);
 		    //worldStability += response[1];
@@ -152,7 +156,8 @@ public class Driver {
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
 		    eventOccuring = false;
 		}
-	    }//end while(eventOccuring) 	    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`````~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	    }//end while(eventOccuring) 	   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 		
 	}//end while(elected)

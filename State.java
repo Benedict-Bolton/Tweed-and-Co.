@@ -9,12 +9,40 @@ public class State extends Others{
     int bluIndex=-1;
     
     //constructor
+    public State(){
+	int rand = (int)(Math.random()* 2);
+	if (rand==0){
+	    redIndex  = (int)(Math.random()*_redStates.length);	    
+	}
+	else{
+	    bluIndex = (int)(Math.random()*_bluStates.length);
+	}
+   	    if (redIndex > 0){ //create a Republican-leaning state
+		setExRight(0.35 );
+		setExLeft(0.20);
+		setCompRight(0.65);
+		setCompLeft(0.35);
+		setHawks(45);
+		setBears(40);
+		setAveInc(35000);
+	    }
+	    else { //create a Democratic-leaning state
+		setExRight(0.20);
+		setExLeft(0.35);
+		setCompRight(0.35);
+		setCompLeft(0.65);
+		setHawks(45);
+		setBears(40);
+		setAveInc(35000);	
+	    }
+    }
+
     public State(String stateName) throws Exception{
-	for(int i=0; i<_bluStates.length(); i++){
+	for(int i=0; i<_bluStates.length; i++){
 	    if (_bluStates[i].equals(stateName)){
 		bluIndex = i;}
 	}
-	for(int i=0; i<_redStates.length(); i++){
+	for(int i=0; i<_redStates.length; i++){
 	    if (_redStates[i].equals(stateName)){
 		redIndex = i;}
 	}
@@ -69,9 +97,9 @@ public class State extends Others{
     //returns the majority party in this state
     //0=republicans, 1=democrats
     public int getMajority(){
-	if(_percentCompRight > 0.5){return 0;}
-	else if(_percentCompLeft > 0.5){return 1;}
-	else{return (int)(Math.random*2.0);}
+	if(getCompRight() > 0.5){return 0;}
+	else if(getCompLeft() > 0.5){return 1;}
+	else{return (int)(Math.random()*2.0);}
     }
 
     //returns the name of this state
