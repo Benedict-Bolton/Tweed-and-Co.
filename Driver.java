@@ -98,11 +98,11 @@ public class Driver {
 	    String[] votesOnBills; //tied to array just above this, three options are Yes, No, and Hell
 	    int powerSource = (int) (Math.random() * 3);
 	    String powerName = "";
-	    while (legislationActive) {  /*~~~~~~~~~~~~~~~~~~~~~~~`
+	    while (legislationActive) {  
 		if ( (passageBill == 1) || (passageBill == 2) || (passageBill == 3) ) {
 		    break;
 		    legislationActive = false;
-		    }  ~~~~~~~~~~~~~~~~~~*/
+		} 
  		Legislation freshBill = new Legislation(); 
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
@@ -126,6 +126,27 @@ public class Driver {
 		if (passageBill == 0) {
 		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); delay();
 		    String vote = Keyboard.readString();
+		    if (vote.equals("Both")) {
+			System.out.println("Your tactic has been successful, the supports of this bill have given up and it is to forever sit in the archives of never voted on Senate Bills");
+			passageBill = 3;
+			legislationActive = false;
+			continue;
+		    }
+		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
+			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");
+		    }
+		    double support = senate.voteLegis(freshBill);
+		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + support + "%");
+		    if (support <= 50) {
+			System.out.println("It seems this bill has failed, despite the support some had for it");
+			passageBill = 2;
+			legislationActive = false;
+		    }
+		    else if (support > 50) {
+			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
+			passageBill = 1
+			legislationActive = false;
+		    }
 		}
 		else if ( ( (passageBill == 4) || (passageBill == 5) || (passageBill == 9) ) && (whoDelay == "You") ) {
 		    System.out.print("You are are successfully deleying the passage of the bill, yet the opposition has not yet given up and let the bill die. They are matching you inch for inch in this battle of wills. You can 'Continue' to attempt to delay the bill further and hope the opposition surrenders, yet this continued obstructionism can have many dangerous effects, you may want to 'Surrender' and let the bill pass:"); delay();
@@ -137,7 +158,7 @@ public class Driver {
 		
 		
 	    }//end while (legislationActive)
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`````
+
 	    boolean eventOccuring = true;
 	    while (eventOccuring) {
 		int eventChoice = (int) (Math.random());
@@ -148,16 +169,15 @@ public class Driver {
 		    System.out.print("Enter the number of the option you wish to pursue: ");
 		    int responseChoice = Keyboard.readInt();
  
-		    double[] response = Event.changeResult (csa,worldStability, responseChoice);
-		    //csa.setIncome(csa.getAveInc() + response[0]);
-		    //worldStability += response[1];
+		    double[] response = Event.changeResult (playerState, worldStability, responseChoice);
+		    playerState.setAveInc(playerState.getAveInc() +  (long) (response[0]) );
+		    worldStability += response[1];
 		    System.out.println("Outcome of your decision: ");
 		    System.out.println("Change to National Average Income -- " +response[0]);
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
 		    eventOccuring = false;
 		}
 	    }//end while(eventOccuring) 	   
-~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 		
 	}//end while(elected)
