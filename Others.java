@@ -76,6 +76,17 @@ public class Others {
 	_hawkLvl = input;
 	return old;}
 
+    //default constructor
+    public Others(){
+	    setExRight(Math.random());
+	    setExLeft(Math.random());
+	    setCompRight(Math.random());
+	    setCompLeft(1.0-getCompRight());
+	    setHawks((int)(Math.random()*100));
+	    setBears((int)(Math.random()*100));
+	    setAveInc(450000);
+    }
+
     //METHODS
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //calculates the votes for a particular Legislation, as a percentage 
@@ -98,10 +109,12 @@ public class Others {
 	if(proposedBy.equals("Republican")){
 	    support+=percentRight*0.3;
 	    percentRight*=0.7;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(proposedBy.equals("Democrat")){
 	    support+=percentLeft*0.3;
 	    percentLeft*=0.7;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(proposedBy.equals("Bipartisan")){
 	    //get the non-extremists of both parties
@@ -109,17 +122,20 @@ public class Others {
 	    percentRight=(_extremismRight);
 	    support+=percentLeft*(1.0-_extremismLeft);
 	    percentLeft=(_extremismLeft);
+	    System.out.println("***DIAG*** "+support);
 	}
 	//economic factors
 	if(bill.getEcon() == 0){ //populist
 	    double temp = percentLeft*_extremismLeft*0.3;
 	    support+=temp;
 	    percentLeft-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(bill.getEcon() == 1){ //trickle-down
 	    double temp = percentRight*_extremismRight*0.3;
 	    support+=temp;
 	    percentRight-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(bill.getEcon() == 2){ //modernism, globilisation
 	    //mostly get Republican support, some Democratic
@@ -129,6 +145,7 @@ public class Others {
 	    double temp2 = percentLeft*0.4;
 	    support+= temp2;
 	    percentLeft-=temp2;
+	    System.out.println("***DIAG*** "+support);
 	}
 	//foreign policy
 	if(bill.getForeign()==0){//intervention, 'MURICA HELL YEAH
@@ -139,6 +156,7 @@ public class Others {
 	    //Dems generally dislike intervention
 	    support+=temp2;
 	    percentLeft-=temp2;
+	    System.out.println("***DIAG*** "+support);
 	}
        	else if(bill.getForeign()==1){//international, the UN and world peace
 	    double temp1 = percentRight*_careBearLvl*0.5;
@@ -148,35 +166,41 @@ public class Others {
 	    double temp2 = percentLeft*_careBearLvl;
 	    support+=temp2;
 	    percentLeft-=temp2;
+	    System.out.println("***DIAG*** "+support);
 	}
-	else if(bill.getForeign() ==2){//isolationist, alienates people who want to get involved
+	/*else if(bill.getForeign() ==2){//isolationist, alienates people who want to get involved
 	    double temp1 = percentRight*(1-_careBearLvl);
 	    support+=temp1;
 	    percentRight-=temp1;
 	    double temp2 = percentLeft*(1-_careBearLvl);
 	    support+=temp2;
 	    percentLeft-=temp2;
-	}
+	    System.out.println("***DIAG*** "+support);
+	    }*/
 	//social factors
 	if(bill.getSoc()==0){//libertarian
 	    double temp = percentRight*_extremismRight;
 	    support+=temp;
 	    percentRight-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(bill.getSoc()==1){//left-leaning
 	    double temp = percentLeft*0.7;
 	    support +=temp;
 	    percentLeft-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(bill.getSoc()==2){//right-leaning
 	    double temp=percentRight*0.7;
 	    support+=temp;
 	    percentRight-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	else if(bill.getSoc()==3){//all-regulation
 	    double temp=percentLeft*_extremismLeft;
 	    support+=temp;
 	    percentRight-=temp;
+	    System.out.println("***DIAG*** "+support);
 	}
 	
 	
@@ -201,5 +225,13 @@ public class Others {
 	double toAdd = (double)(input/10.0);
 	setCompRight(_percentCompRight-=toAdd);
 	return setCompLeft(_percentCompLeft+=toAdd);
+    }
+
+
+    //main method for testing
+    public static void main( String[] args){
+	Others foo = new Others();
+	Legislation legis = new Legislation();
+	System.out.println(foo.voteLegis(legis));
     }
 }

@@ -164,7 +164,7 @@ public class Driver {
 		int eventChoice = (int) (Math.random());
 		if (eventChoice == 0) {
 		    Event currentEvent = new Event("Foreign");
-		    System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\n Ahhh *WeeWoo* wait what's that? *WeeWoo* huh? *WeeWooWeeWooWeeWoo* ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it in the past...ugh maybe the change has to do with that new intern Ms. Lewinsky...");
+		    System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\n Ahhh *WeeWoo* wait what's that? *WeeWoo* huh? *WeeWooWeeWooWeeWoo* ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it, but he's indisposed...maybe the change has to do with that new intern Ms. Lewinsky...");
 		    System.out.println(currentEvent);
 		    System.out.print("Enter the number of the option you wish to pursue: ");
 		    int responseChoice = Keyboard.readInt();

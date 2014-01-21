@@ -6,13 +6,7 @@ public class Senate extends Others{
     //Constructors
     //default constructor--creates random Senate 
     public Senate(){
-	    setExRight(Math.random());
-	    setExLeft(Math.random());
-	    setCompRight(Math.random());
-	    setCompLeft(1.0-getCompRight());
-	    setHawks((int)(Math.random()*100));
-	    setBears((int)(Math.random()*100));
-	    setAveInc(450000);
+	super();
     }
     //For use in game constructor
     public Senate(int year){
