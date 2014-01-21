@@ -1,4 +1,3 @@
-
 import cs1.Keyboard;
 import java.util.*;
 public class Driver {
@@ -94,8 +93,8 @@ public class Driver {
 	    //5 = being delayed by filibuster, 
 	    //9 = total delay attack
 	    Event lastEvent;
-	    Legislation[] finishedLegislation;
-	    String[] votesOnBills; //tied to array just above this, three options are Yes, No, and Hell
+	    ArrayList<Legislation> finishedLegislation = new ArrayList<Legislation>();
+	    ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first your vote, for the second it is the result, yes no or hell
 	    int powerSource = (int) (Math.random() * 3);
 	    String powerName = "";
 	    while (legislationActive) {  
@@ -130,7 +129,13 @@ public class Driver {
 			System.out.println("Your tactic has been successful, the supports of this bill have given up and it is to forever sit in the archives of never voted on Senate Bills");
 			passageBill = 3;
 			legislationActive = false;
-			continue;
+			finishedLegislation.add(freshBill);
+			String[] votesBill = new String[3];
+			votesBill[0] = year;
+			votesBill[1] = "Delay";
+			votesBill[2] = "Hell";
+			votesOnBills.add(votesBill)
+			continue; 
 		    }
 		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
 			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");
@@ -140,11 +145,21 @@ public class Driver {
 		    if (support <= 50) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
+			String[] votesBill = new String[3];
+			votesBill[0] = year;
+			votesBill[1] = vote;
+			votesBill[2] = "Fail";
+			votesOnBills.add(votesBill)
 			legislationActive = false;
 		    }
 		    else if (support > 50) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1
+			String[] votesBill = new String[3];
+			votesBill[0] = year;
+			votesBill[1] = vote;
+			votesBill[2] = "Pass";
+			votesOnBills.add(votesBill)
 			legislationActive = false;
 		    }
 		}
@@ -155,7 +170,7 @@ public class Driver {
 
 		
 
-		
+			
 		
 	    }//end while (legislationActive)
 
