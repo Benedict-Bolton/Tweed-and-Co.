@@ -1,5 +1,8 @@
+/** Class Description of Event
+ * @author Benedict Bolton and Shahruz Ghaemi*/
 public class Event{
     
+    /** EVENTS is a constant 2-D array of all possible event that can be generated, in each row is the response options that come with the text of the event*/
     private final String[][] EVENTS = new String[20][5];
     
     private String _text;
@@ -7,6 +10,10 @@ public class Event{
     private String _type; 
     
     //pre: String type == Domestic || Foreign
+    /** Constructor Description for Event(String) 
+     * @param type This is String which defines the type of Event that is to be created, it may be either , letter for letter, Domestic or Foreign
+     * @return this has no return as it is a constructor
+     */
     public Event(String type) {
 	initializeEvents();
 	_type = type;
@@ -32,7 +39,7 @@ public class Event{
     }
     
     //pre: these are how the world changes based on the option chosen for the event (they all do the same as now, yes it is predictable, but they will need to learn the pattern quickly
-    public static double[] changeResult (Public usa, double worldStable, int choice) {
+    public static double[] changeResult (State usa, double worldStable, int choice) {
 	double[] newStuff = new double[2];
 	if (choice == 0) {
 	    newStuff[0] = -(usa.getAveInc() * 0.10);
