@@ -19,19 +19,20 @@ public class Others {
     
     //Accessor Methods
     public double getExRight () {
-	return _extremismRight;
+	//return Math.rint(_extremismRight);
+	return round(_extremismRight);
     }
     public double getExLeft () {
-	return _extremismLeft; 
+	//return Math.rint(_extremismLeft); 
+	return round(_extremismLeft);
     }
     public double getCompRight () {
-	return _percentCompRight;
-    }
-    public int getReps() {
-	return (int)(_percentCompRight * 100);
+	//return Math.rint(_percentCompRight);
+	return round(_percentCompRight);
     }
     public double getCompLeft () {
-	return _percentCompLeft;
+	//return Math.rint(_percentCompLeft);
+	return round(_percentCompLeft);
     }
     public int getDems() {
 	return (int)(_percentCompLeft * 100);
@@ -109,12 +110,12 @@ public class Others {
 	if(proposedBy.equals("Republican")){
 	    support+=percentRight*0.3;
 	    percentRight*=0.7;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--proposed R*** "+support);
 	}
 	else if(proposedBy.equals("Democrat")){
 	    support+=percentLeft*0.3;
 	    percentLeft*=0.7;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--proposed D*** "+support);
 	}
 	else if(proposedBy.equals("Bipartisan")){
 	    //get the non-extremists of both parties
@@ -122,21 +123,21 @@ public class Others {
 	    percentRight=(_extremismRight);
 	    support+=percentLeft*(1.0-_extremismLeft);
 	    percentLeft=(_extremismLeft);
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--proposed R-D*** "+support);
 	}
 	//economic factors
 	if(bill.getEcon() == 0){ //populist
 	    double temp = percentLeft*_extremismLeft*0.3;
 	    support+=temp;
 	    percentLeft-=temp;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--populist*** "+support);
 	}
 	else if(bill.getEcon() == 1){ //trickle-down
 	    double temp = percentRight*_extremismRight*0.3;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG*** "+support);
-	}
+	    System.out.println("***DIAG--trickledown*** "+support);
+	}/*
 	else if(bill.getEcon() == 2){ //modernism, globilisation
 	    //mostly get Republican support, some Democratic
 	    double temp1 = percentRight*0.7;
@@ -145,28 +146,28 @@ public class Others {
 	    double temp2 = percentLeft*0.4;
 	    support+= temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG*** "+support);
-	}
+	    System.out.println("***DIAG--globilise*** "+support);
+	}*/
 	//foreign policy
 	if(bill.getForeign()==0){//intervention, 'MURICA HELL YEAH
-	    double temp1 = percentRight*_hawkLvl;
+	    double temp1 = percentRight*(_hawkLvl/100.0);
 	    support+=temp1;
 	    percentRight-=temp1;
-	    double temp2 = percentLeft*_hawkLvl*0.5;
+	    double temp2 = percentLeft*(_hawkLvl/100.0)*0.5;
 	    //Dems generally dislike intervention
 	    support+=temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--intervene*** "+support);
 	}
        	else if(bill.getForeign()==1){//international, the UN and world peace
-	    double temp1 = percentRight*_careBearLvl*0.5;
+	    double temp1 = percentRight*(_careBearLvl/100.0)*0.5;
 	    //Reps generally dislike hippie stuff like this
 	    support+=temp1;
 	    percentRight-=temp1;
-	    double temp2 = percentLeft*_careBearLvl;
+	    double temp2 = percentLeft*(_careBearLvl/100.0);
 	    support+=temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--UN*** "+support);
 	}
 	/*else if(bill.getForeign() ==2){//isolationist, alienates people who want to get involved
 	    double temp1 = percentRight*(1-_careBearLvl);
@@ -178,35 +179,40 @@ public class Others {
 	    System.out.println("***DIAG*** "+support);
 	    }*/
 	//social factors
-	if(bill.getSoc()==0){//libertarian
+	/*if(bill.getSoc()==0){//libertarian
 	    double temp = percentRight*_extremismRight;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG*** "+support);
-	}
-	else if(bill.getSoc()==1){//left-leaning
+	    System.out.println("***DIAG--libertarian*** "+support);
+	    }*/
+	if(bill.getSoc()==1){//left-leaning
 	    double temp = percentLeft*0.7;
 	    support +=temp;
 	    percentLeft-=temp;
-	    System.out.println("***DIAG*** "+support);
+	    System.out.println("***DIAG--lefty*** "+support);
 	}
 	else if(bill.getSoc()==2){//right-leaning
 	    double temp=percentRight*0.7;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG*** "+support);
-	}
+	    System.out.println("***DIAG--righty*** "+support);
+	}/*
 	else if(bill.getSoc()==3){//all-regulation
 	    double temp=percentLeft*_extremismLeft;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG*** "+support);
-	}
+	    System.out.println("***DIAG--facist*** "+support);
+	    }*/
 	
 	
 	//clean up the messy decimal places
-	int x = (int)(support*100.0);
-	support = (double)(x/100.0);
+	//	int x = (int)(support*100.0);
+	//	System.out.println("***DIAGx*** "+x);
+	//	support = (double)(x);
+
+	support = round(support);
+
+	System.out.println("***DIAG*** "+support);
 	return support;
     }
 
@@ -227,11 +233,27 @@ public class Others {
 	return setCompLeft(_percentCompLeft+=toAdd);
     }
 
+    //rounding function
+    public double round(double input){
+	return(double)((int)(input*100.0)/100.0);
+    }
 
     //main method for testing
     public static void main( String[] args){
 	Others foo = new Others();
 	Legislation legis = new Legislation();
-	System.out.println(foo.voteLegis(legis));
+	System.out.println("support for legis: "+foo.voteLegis(legis));
+
+	System.out.println("Republicans: "+foo.getCompRight());
+	System.out.println("Dems: "+foo.getCompLeft());
+	double x = Math.random()*100;
+	System.out.println(x+" ... ... ... "+Math.rint(x));
+	/*
+	int x = (int)(Math.random() *100);
+	System.out.println("Add "+x+" Dems...");
+	foo.addDems(x);
+	System.out.println("Republicans: "+foo.getCompRight());
+	System.out.println("Dems: "+foo.getCompLeft());*/
+	
     }
 }
