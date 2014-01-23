@@ -225,6 +225,8 @@ public class Driver {
 
 		
 	}//end while(elected)
+	
+	System.out.println("So your journey has come to an end fair Senator. Thou hast had a good run, doing much in the way of helping one's home state and the world...maybe...or just enjoying all the free stuff, oak panelling, and comfy office chairs your daring appearence granted you. Thinking back you realize you won't miss it much, yes it was semi-not-really enjoyable, but to be honest it did not pay that great. Also the politics seemed to make no sense, it was like everyone voted on capricious whims based on established convictions with no basis in fact....hmm actually looking back US politics is horrible, its great to be out. Now you get to make the real money as a...LOBBYIST!!! ....So another journey begins.); 
 	/*=============================
 =================================*/
     }//end main
