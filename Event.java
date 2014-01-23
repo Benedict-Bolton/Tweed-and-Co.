@@ -1,5 +1,5 @@
 /** Class Description of Event
- * @author Benedict Bolton and Shahruz Ghaemi*/
+ * @author Benedict Bolton*/
 public class Event{
     
     /** EVENTS is a constant 2-D array of all possible event that can be generated, in each row is the response options that come with the text of the event*/
@@ -18,7 +18,7 @@ public class Event{
 	initializeEvents();
 	_type = type;
 	if (type.equals("Foreign")) {
-	    int eventPlace = (int) (Math.random() * 4);
+	    int eventPlace = (int) (Math.random() * 5);
 	    _text = EVENTS[eventPlace][0];
 	    for(int c = 1; c < EVENTS[eventPlace].length; c++) {
 		_options[c-1] = EVENTS[eventPlace][c];
@@ -98,6 +98,14 @@ public class Event{
 	EVENTS[3][2] = "Are we weak little Belgians!?!? I think not, Marines will be sent to remove the Taylor government from the capital in Monrovia. The air force and paratroopers will then be used to mine the diamond mines so they cannot be used. That will bring freedom to those poor oppressed workers!";
 	EVENTS[3][3] = "A Civil War! Disrespect of Human Rights! In Africa! Its never happened before! Well I suppose it has been about 2 years we were due for another one. We won't change anything like in the other 100, we should just stay out and let another dictator replace Taylor like in the past.";
 	EVENTS[3][4] = "I do believe its time those freed slaves, and their assets, be re-united with their homeland. A large 'Peace-Keeping' force will be sent to Liberia holding major cities, and most importantly the diamond mines, until fair elections may be held. That will of course be determined by the US.";
+
+
+	EVENTS[4][0] = "With the fall of the Soviet Union not all of their huge stores of nuclear weapons were within the Russian Federation's newly drawn borders. Many weapons with the potential to make our blood boil in its veins, our windows shatter so rapidly that they turn us into hamburger meat, melt our skin as a blistering wave of heat as hot as the surface of the sun flows over us, and shatter every bone in our body into dust from a massive shock wave destroying all in its path. ehem...Sorry, got carried away, well it seems one of these weapons stored in the new state of Kazahkstan has gone missing. This is a bit problamatic...";
+	//repsonses
+	EVENTS[4][1] = "Trained US forces will be sent to Kazakhstan to work with local forces, providing the funding for the relocation and securing of the missing nuclear weapon.";
+	EVENTS[4][2] = "We have some preliminary information on the general area and rough city where the nuclear weapon is now located, it is unknown who is holding it, or if its volitile. But no effort can be wasted on protecting Americans, and who cares if some Kazahks die. We will firebomb the whole area with F-16s making sure that nuke goes nowhere again.";
+	EVENTS[4][3] = "The nuclear weapon is Russian, they are starting to go after now, they certainly will take much longer to secure it, but they will get it eventually, its not our business anyways.";
+	EVENTS[4][4] = "Hey free markets in the USSR for consumer products also means free markets for weapons. The neibhoring nations of Kazahkstan will certainly be scared of that missing nuke, so lets sell them plenty of WMDS and weapons so they can feel 'safe'. Plus we make a nice profit while we are at it.";
 
 
     }
