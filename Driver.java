@@ -31,11 +31,10 @@ public class Driver {
 	    }
 	    catch (Exception ex){
 		System.out.println(ex.getMessage() );
-		System.out.println("Try again. You can't fool the bureaucracy...");
 	    }
 	}
 	System.out.println("=====================================");
-	try{//this try-catch system just to make it past stupid compiler
+	try{//this try-catch system just to make it past the compiler
 	    homeState=new State(ans);
 	    System.out.println(homeState);
 	}
@@ -80,7 +79,7 @@ public class Driver {
 	    // continue;}
 	    double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
 	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
-	    System.out.println("\tYou have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
+	    System.out.println("You have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
 	    delay();
 
 	    boolean legislationActive = true;
@@ -94,72 +93,72 @@ public class Driver {
 	    //9 = total delay attack
 	    Event lastEvent;
 	    ArrayList<Legislation> finishedLegislation = new ArrayList<Legislation>();
-	    ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first your vote, for the second it is the result, yes no or hell
+	    ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first(your vote), for the second it is the result, yes no or hell
 	    int powerSource = (int) (Math.random() * 3);
 	    String powerName = "";
 	    while (legislationActive) {  
 		if ( (passageBill == 1) || (passageBill == 2) || (passageBill == 3) ) {
 		    break;
-		    legislationActive = false;
+		    //legislationActive = false;
 		} 
  		Legislation freshBill = new Legislation(); 
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
-		System.out.println("Current support for this bill: "+senate.voteLegis(freshBill)*100+"%");
+		System.out.println("Current Senate support for this bill: "+senate.voteLegis(freshBill)+"%");
 		delay();
 		if (powerSource == 0) {
 		    powerName = "Magnificent Hair";
-		    System.out.println("\n\n All the other Senators stare at that perfectly Hairsprayed hair of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.\n\n");
+		    System.out.println("\n\n All the other Senators stare at that perfectly HAIRSPRAYED head of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.\n\n");
 		    delay();
 
 		}
 		else if (powerSource == 1) {
 		    powerName = "Amazing Pin";		    
-		    System.out.println("\n\n It is new, it is shiny, and, by the majestic wings of your beautiful state bird, it is AMERICAN.\n That little American flag pin you put in your lapel this morning has enchanted some of the lesser Senators, your vote now hold theirs in its sway, use the power of your fake patriotism now to attempt to determine the fate of this bill with your vote.\n\n"); delay();
+		    System.out.println("\n\n It is new, it is shiny, and, by the majestic wings of your beautiful state bird, it is AMERICAN.\n That little American FLAG PIN  you put in your lapel this morning has enchanted some of the lesser Senators, your vote now hold theirs in its sway, use the power of your fake patriotism now to attempt to determine the fate of this bill with your vote.\n\n"); delay();
 		}
 
 		else {
 		    powerName = "Stupendous Argyle Socks";
-		    System.out.println("\n\n They stand aghast in surprised amazement, could he really be going for it, flaunting the greatest, probably more like the 11th greatest, of Senate Traditions. Yes indeed you had, you wore....gasp!....Argyle Socks! You have thrown aside the tradition of plain dress socks, and as such every like maybe 3 steps the other Senators can sometimes see something that is not quite the color of your pants! This rebliousness inspires, it gives power, and thus you now have the support of some of the Senators, now you can vote to attempt to change the fate of this bill.\n\n"); delay();
+		    System.out.println("\n\n They stand aghast in surprised amazement, could he really be going for it, flaunting the greatest--probably more like the 11th greatest--of Senate Traditions. Yes indeed you, you wore....gasp!....ARGYLE SOCKS! You have thrown aside the tradition of plain dress socks, and as such every 3 steps the other Senators can sometimes see something that is not quite the color of your pants! This rebliousness inspires, it gives power, and thus you now have the support of some of the Senators, now you can vote to attempt to change the fate of this bill.\n\n"); delay();
 		}
 		if (passageBill == 0) {
-		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); delay();
+		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); 
 		    String vote = Keyboard.readString();
 		    if (vote.equals("Both")) {
-			System.out.println("Your tactic has been successful, the supports of this bill have given up and it is to forever sit in the archives of never voted on Senate Bills");
+			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills");
 			passageBill = 3;
 			legislationActive = false;
 			finishedLegislation.add(freshBill);
 			String[] votesBill = new String[3];
-			votesBill[0] = year;
+			votesBill[0] = ""+year;
 			votesBill[1] = "Delay";
 			votesBill[2] = "Hell";
-			votesOnBills.add(votesBill)
+			votesOnBills.add(votesBill);
 			continue; 
 		    }
 		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
-			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");
+			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");delay();
 		    }
 		    double support = senate.voteLegis(freshBill);
 		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + support + "%");
-		    if (support <= 50) {
+		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
 			String[] votesBill = new String[3];
-			votesBill[0] = year;
+			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Fail";
-			votesOnBills.add(votesBill)
+			votesOnBills.add(votesBill);
 			legislationActive = false;
 		    }
-		    else if (support > 50) {
+		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
-			passageBill = 1
+			passageBill = 1;
 			String[] votesBill = new String[3];
-			votesBill[0] = year;
+			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Pass";
-			votesOnBills.add(votesBill)
+			votesOnBills.add(votesBill);
 			legislationActive = false;
 		    }
 		}

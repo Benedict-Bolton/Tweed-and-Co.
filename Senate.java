@@ -26,10 +26,12 @@ public class Senate extends Others{
     //toString method--displays all instance variables
     public String toString(){
 	String s ="This is what the Senate looks like...";
-	s+="\n\t"+getReps()+" Republican Senators";
-	s+="\n\t"+getDems()+" Democratic Senators";
-	s+="\n\tRepublican extremism: "+getExRight()*100+"%";
-	s+="\n\tDemocratic extremism: "+getExLeft()*100+"%";
+	s+="\n\t"+round(getCompRight()*100.0)+" Republican Senators";
+	if(getCompRight()>getCompLeft()){s+="   (MAJORITY)";}
+	s+="\n\t"+round(getCompLeft()*100.0)+" Democratic Senators";
+	if(getCompLeft()>getCompRight()){s+="   (MAJORITY)";}
+	s+="\n\tRepublican extremism: "+round(getExRight()*100.0)+"%";
+	s+="\n\tDemocratic extremism: "+round(getExLeft()*100.0)+"%";
 	s+="\n\tThe Senate's willingness to intervene in the world (hawkishness): "+getHawks()+"%";
 	s+="\n\tThe Senate's bleeding-heart charity for the world: "+getBears()+"%";
 	s+="\n\tThe average Senator's income: $"+getAveInc();

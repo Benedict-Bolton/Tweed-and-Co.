@@ -50,20 +50,36 @@ public class Others {
     //Mutators
     public double setExRight(double input){
 	double old = _extremismRight;
-	_extremismRight = input;
-	return old;}
+	if (input > 1.0){
+	    _extremismRight = 1.0;
+	    return old;}
+	else{
+	    _extremismRight = input;
+	    return old;} }
     public double setExLeft(double input){
 	double old = _extremismLeft;
-	_extremismLeft = input;
-	return old;}
+	if (input > 1.0){
+	    _extremismLeft = 1.0;
+	    return old;}
+	else{
+	    _extremismLeft = input;
+	    return old;} }
     public double setCompRight(double input){
        	double old = _percentCompRight;
-	_percentCompRight = input;
-	return old;}
+	if (input > 1.0){
+	    _percentCompRight= 1.0;
+	    return old;}
+	else{
+	    _percentCompRight = input;
+	    return old;} }
     public double setCompLeft(double input){
 	double old = _percentCompLeft;
-	_percentCompLeft = input;
-	return old;}
+	if (input > 1.0){
+	    _percentCompLeft = 1.0;
+	    return old;}
+	else{
+	    _percentCompLeft = input;
+	    return old;} }
     public long setAveInc(long input){
 	long old = _averageIncome;
 	_averageIncome = input;
@@ -99,14 +115,17 @@ public class Others {
 	//bill proposed by one side gets 30% approval from that side
 
     	double support = 0.0;
-	double percentLeft = _percentCompLeft;
-	double percentRight = _percentCompRight;
+	double percentLeft = getCompLeft();
+	double percentRight = getCompRight();
 	String proposedBy = "";
 	if (bill.getProp() == 0){ proposedBy = "Democrat";}
 	else if (bill.getProp() == 1){ proposedBy = "Republican";}
 	else if (bill.getProp() == 2){ proposedBy = "Bipartisan";}
 
+	//====support based on the player's awesome charisma====
 	
+
+	//====support based on the merits of the bill itself=====	
 	if(proposedBy.equals("Republican")){
 	    support+=percentRight*0.3;
 	    percentRight*=0.7;

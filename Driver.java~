@@ -1,4 +1,3 @@
-
 import cs1.Keyboard;
 import java.util.*;
 public class Driver {
@@ -21,7 +20,7 @@ public class Driver {
     public static State generateState(){	
 	boolean trigger = true;
 	String ans = "";
-	State homeState;
+	State homeState = new State();
 	while(trigger){
 	    System.out.println("\nYou are a venerable U.S. Senator from which state? \n(Remember to Capitalize the First Letter)");
 	    ans = Keyboard.readString();
@@ -32,11 +31,10 @@ public class Driver {
 	    }
 	    catch (Exception ex){
 		System.out.println(ex.getMessage() );
-		System.out.println("Try again. You can't fool the bureaucracy...");
 	    }
 	}
 	System.out.println("=====================================");
-	try{//this try-catch system just to make it past stupid compiler
+	try{//this try-catch system just to make it past the compiler
 	    homeState=new State(ans);
 	    System.out.println(homeState);
 	}
@@ -81,7 +79,7 @@ public class Driver {
 	    // continue;}
 	    double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
 	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
-	    System.out.println("\tYou have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
+	    System.out.println("You have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
 	    delay();
 
 	    boolean legislationActive = true;
@@ -94,19 +92,19 @@ public class Driver {
 	    //5 = being delayed by filibuster, 
 	    //9 = total delay attack
 	    Event lastEvent;
-	    Legislation[] finishedLegislation;
-	    String[] votesOnBills; //tied to array just above this, three options are Yes, No, and Hell
+	    ArrayList<Legislation> finishedLegislation = new ArrayList<Legislation>();
+	    ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first(your vote), for the second it is the result, yes no or hell
 	    int powerSource = (int) (Math.random() * 3);
 	    String powerName = "";
-	    while (legislationActive) {  /*~~~~~~~~~~~~~~~~~~~~~~~`
+	    while (legislationActive) {  
 		if ( (passageBill == 1) || (passageBill == 2) || (passageBill == 3) ) {
 		    break;
 		    legislationActive = false;
-		    }  ~~~~~~~~~~~~~~~~~~*/
+		} 
  		Legislation freshBill = new Legislation(); 
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
-		System.out.println("Current support for this bill: "+senate.voteLegis(freshBill)*100+"%");
+		System.out.println("Current support for this bill: "+senate.voteLegis(freshBill)+"%");
 		delay();
 		if (powerSource == 0) {
 		    powerName = "Magnificent Hair";
@@ -126,6 +124,43 @@ public class Driver {
 		if (passageBill == 0) {
 		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); delay();
 		    String vote = Keyboard.readString();
+		    if (vote.equals("Both")) {
+			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills");
+			passageBill = 3;
+			legislationActive = false;
+			finishedLegislation.add(freshBill);
+			String[] votesBill = new String[3];
+			votesBill[0] = ""+year;
+			votesBill[1] = "Delay";
+			votesBill[2] = "Hell";
+			votesOnBills.add(votesBill);
+			continue; 
+		    }
+		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
+			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");
+		    }
+		    double support = senate.voteLegis(freshBill);
+		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + support + "%");
+		    if (support <= 50) {
+			System.out.println("It seems this bill has failed, despite the support some had for it");
+			passageBill = 2;
+			String[] votesBill = new String[3];
+			votesBill[0] = year;
+			votesBill[1] = vote;
+			votesBill[2] = "Fail";
+			votesOnBills.add(votesBill);
+			legislationActive = false;
+		    }
+		    else if (support > 50) {
+			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
+			passageBill = 1;
+			String[] votesBill = new String[3];
+			votesBill[0] = year;
+			votesBill[1] = vote;
+			votesBill[2] = "Pass";
+			votesOnBills.add(votesBill);
+			legislationActive = false;
+		    }
 		}
 		else if ( ( (passageBill == 4) || (passageBill == 5) || (passageBill == 9) ) && (whoDelay == "You") ) {
 		    System.out.print("You are are successfully deleying the passage of the bill, yet the opposition has not yet given up and let the bill die. They are matching you inch for inch in this battle of wills. You can 'Continue' to attempt to delay the bill further and hope the opposition surrenders, yet this continued obstructionism can have many dangerous effects, you may want to 'Surrender' and let the bill pass:"); delay();
@@ -134,30 +169,29 @@ public class Driver {
 
 		
 
-		
+			
 		
 	    }//end while (legislationActive)
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`````
+
 	    boolean eventOccuring = true;
 	    while (eventOccuring) {
 		int eventChoice = (int) (Math.random());
 		if (eventChoice == 0) {
 		    Event currentEvent = new Event("Foreign");
-		    System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\n Ahhh *WeeWoo* wait what's that? *WeeWoo* huh? *WeeWooWeeWooWeeWoo* ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it in the past...ugh maybe the change has to do with that new intern Ms. Lewinsky...");
+		    System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\n Ahhh *WeeWoo* wait what's that? *WeeWoo* huh? *WeeWooWeeWooWeeWoo* ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it, but he's indisposed...maybe the change has to do with that new intern Ms. Lewinsky...");
 		    System.out.println(currentEvent);
 		    System.out.print("Enter the number of the option you wish to pursue: ");
 		    int responseChoice = Keyboard.readInt();
  
-		    double[] response = Event.changeResult (csa,worldStability, responseChoice);
-		    //csa.setIncome(csa.getAveInc() + response[0]);
-		    //worldStability += response[1];
+		    double[] response = Event.changeResult (playerState, worldStability, responseChoice);
+		    playerState.setAveInc(playerState.getAveInc() +  (long) (response[0]) );
+		    worldStability += response[1];
 		    System.out.println("Outcome of your decision: ");
 		    System.out.println("Change to National Average Income -- " +response[0]);
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
 		    eventOccuring = false;
 		}
 	    }//end while(eventOccuring) 	   
-~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 		
 	}//end while(elected)

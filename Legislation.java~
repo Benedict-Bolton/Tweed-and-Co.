@@ -2,6 +2,7 @@ public class Legislation {
 
     //important: http://infohost.nmt.edu/tcc/help/xfer/scp.html
     
+    //INSTANCE VARS
     //text of the bill
     private String text;
 
@@ -60,7 +61,7 @@ public class Legislation {
 	ans += "\n";
 	ans += "Does this Bill help fudge elections to help you get relected?: ";
 	if (gerryMandering == 0) { ans += "No"; }
-	else { ans += "Yes"; }
+	else { ans += "Yes...((shhh))"; }
 	ans += "\n";
 	ans += "Foreign Policy Ideology Pursued by the Bill: ";
 	if (foreignType == 0) { ans += "Interventionalism"; }

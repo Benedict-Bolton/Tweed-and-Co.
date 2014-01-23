@@ -67,13 +67,15 @@ public class Legislation {
 	if (foreignType == 0) { ans += "Interventionalism"; }
 	else if (foreignType == 1) { ans += "Internationalism"; }
 	else if (foreignType == 2){ ans += "Isolationism"; }
-	else {ans += "This Bill is largely independant of any Foreign Policy Ideology";}
+	else {//ans += "This Bill is largely independant of any Foreign Policy Ideology";
+	    ans+="None";}
 	ans += "\n";
 	ans += "Economic Policy Pursued by the Bill: ";
 	if (economicsType == 0) { ans += "Populism"; }
 	else if (economicsType == 1) { ans += "Supply-Side Economics"; }
 	else if (economicsType == 2) { ans += "Modernization"; }
-	else {ans += "This Bill is largely independant of any defined Economic Policy";}
+	else {//ans += "This Bill is largely independant of any defined Economic Policy";
+	    ans+="None";}
 	ans += "\n";
 	ans += "Overall this bill might be deemed by society as: ";
 	if (socialType == 0) { ans += "Libertarian"; }

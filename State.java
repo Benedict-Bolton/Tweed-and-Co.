@@ -77,11 +77,13 @@ public class State extends Others{
 
     //toString method--returns _stateName and other instance vars
     public String toString(){
-	String s ="This is what "+_stateName+ " looks like...";
-	s+="\n\t"+getReps()+"% registered Republicans";
-	s+="\n\t"+getDems()+"% registered Democrats";
-	s+="\n\tRepublican extremism: "+getExRight()*100+"%";
-	s+="\n\tDemocratic extremism: "+getExLeft()*100+"%";
+	String s ="These are the people of "+_stateName+", your constituents...";
+	s+="\n\t"+round(getCompRight()*100.0)+"% registered Republicans";
+	if(getCompRight()>getCompLeft()){s+="   (MAJORITY)";}
+	s+="\n\t"+round(getCompLeft()*100.0)+"% registered Democrats";
+	if(getCompLeft()>getCompRight()){s+="   (MAJORITY)";}
+	s+="\n\tRepublican extremism: "+round(getExRight()*100)+"%";
+	s+="\n\tDemocratic extremism: "+round(getExLeft()*100)+"%";
 	s+="\n\tThe people's willingness to intervene in the world (hawkishness): "+getHawks()+"%";
 	s+="\n\tThe people's bleeding-heart charity for the world: "+getBears()+"%";
 	s+="\n\tThe average household's income: $"+getAveInc();
