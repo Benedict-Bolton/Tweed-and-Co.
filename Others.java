@@ -108,7 +108,7 @@ public class Others {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //calculates the votes for a particular Legislation, as a double
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public double voteLegis (Legislation bill) {
+    public double voteLegis (Legislation bill, String playerVote, State playerState) {
     	//checks depending variables, 
 	//calculates a percentage of support for the Legislation
 	//based on extremism
@@ -122,7 +122,36 @@ public class Others {
 	else if (bill.getProp() == 1){ proposedBy = "Republican";}
 	else if (bill.getProp() == 2){ proposedBy = "Bipartisan";}
 
-	//====support based on the player's awesome charisma====
+	//====support based on the player's awesome charisma====\
+	//player can vote: For, Against, Filibuster, Amendments, Both
+	if ( playerVote.equals("None") || playerVote==null ){ //base case
+	}
+	else if (playerVote.equals("For")){
+	    if(playerState.getMajority()==0){//republican playerState
+		support+=percentRight*0.5;
+		percentRight*=0.5;
+		System.out.println("***DIAG--R senator swayed R*** "+support);
+	    }
+	    else if(playerState.getMajority()==1){//democratic playerState
+		support+=percentLeft*0.5;
+		percentLeft*=0.5;
+		System.out.println("***DIAG--D senator swayed D*** "+support);
+	    }
+	}
+
+	else if (playerVote.equals("Against")){
+	    if(playerState.getMajority()==0){//republican playerState
+		support+=percentRight*0.5;
+		percentRight*=0.5;
+		System.out.println("***DIAG--R senator swayed R*** "+support);
+	    }
+	    else if(playerState.getMajority()==1){//democratic playerState
+		support+=percentLeft*0.5;
+		percentLeft*=0.5;
+		System.out.println("***DIAG--D senator swayed D*** "+support);
+	    }
+	}
+	
 	
 
 	//====support based on the merits of the bill itself=====	
@@ -257,7 +286,7 @@ public class Others {
     public static void main( String[] args){
 	Others foo = new Others();
 	Legislation legis = new Legislation();
-	System.out.println("support for legis: "+foo.voteLegis(legis));
+	//	System.out.println("support for legis: "+foo.voteLegis(legis));
 
 	System.out.println("Republicans: "+foo.getCompRight());
 	System.out.println("Dems: "+foo.getCompLeft());
