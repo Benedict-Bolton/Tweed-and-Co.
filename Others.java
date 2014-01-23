@@ -106,7 +106,7 @@ public class Others {
 
     //METHODS
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //calculates the votes for a particular Legislation, as a percentage 
+    //calculates the votes for a particular Legislation, as a double
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public double voteLegis (Legislation bill) {
     	//checks depending variables, 
@@ -222,13 +222,6 @@ public class Others {
 	    percentRight-=temp;
 	    System.out.println("***DIAG--facist*** "+support);
 	    }*/
-	
-	
-	//clean up the messy decimal places
-	//	int x = (int)(support*100.0);
-	//	System.out.println("***DIAGx*** "+x);
-	//	support = (double)(x);
-
 	support = round(support);
 
 	System.out.println("***DIAG*** "+support);
@@ -252,12 +245,15 @@ public class Others {
 	return setCompLeft(_percentCompLeft+=toAdd);
     }
 
-    //rounding function
+    //~~~~~~~~~~~~~~~~rounding function~~~~~~~~~~~~~~~~~~~
+    //takes care of the messy doubles
+    //returns a nice, two-decimal place double
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public double round(double input){
 	return(double)((int)(input*100.0)/100.0);
     }
 
-    //main method for testing
+    //~~~~~~~~~~~~~~~~main method for testing~~~~~~~~~~~~~~
     public static void main( String[] args){
 	Others foo = new Others();
 	Legislation legis = new Legislation();

@@ -67,6 +67,7 @@ public class Driver {
 	boolean elected = true;
 	boolean censored = false;
 	boolean arrested = false;
+	int yearsPlayed = 0;
 	while (elected) {
 	    //if (public.getAvgInc() <= (orig.getAvgInc() * 0.4)) {  //conditions to get kicked out:
 	    // elected = false;
@@ -81,6 +82,11 @@ public class Driver {
 	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
 	    System.out.println("You have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
 	    delay();
+
+	    //start an election cycle
+	    if (yearsPlayed%6==0){
+		elected = player.election(playerState);
+	    }
 
 	    boolean legislationActive = true;
 	    int passageBill = 0; 
@@ -170,7 +176,7 @@ public class Driver {
 		
 
 			
-		
+		yearsPlayed+=1;
 	    }//end while (legislationActive)
 
 	    boolean eventOccuring = true;
@@ -191,6 +197,7 @@ public class Driver {
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
 		    eventOccuring = false;
 		}
+		yearsPlayed+=1;
 	    }//end while(eventOccuring) 	   
 
 		

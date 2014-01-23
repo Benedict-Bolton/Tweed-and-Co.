@@ -4,18 +4,18 @@ public class Player extends Others{
     private State _homeState;
     private int _achievements = 0;
     private int _party; //0=republicans, 1=democrats
-    private int _income;
+    private long _income;
 
     //constructors
     public Player(){
 	_homeState = new State();
-	_party = home.getMajority();
-	_income = home.getAvgInc();
+	_party = _homeState.getMajority();
+	_income = _homeState.getAveInc();
     }
     public Player(State state){
 	_homeState = state;
 	_party = state.getMajority();
-	_income = state.getAvgInc() * 10;
+	_income = state.getAveInc() * 10;
     }
 
     //methods
@@ -32,21 +32,21 @@ public class Player extends Others{
 
 	if (bill.getForeign()==0){//intervention
 	    if(_homeState.getHawks()>0.5){_achievements+=1;}
-	    if(_homeState.getBear()>0.5){_achievements-=1;}
+	    if(_homeState.getBears()>0.5){_achievements-=1;}
  	}
 	else if(bill.getForeign()==1){//international, UN hippie stuff
 	    if(_homeState.getHawks()>0.5){_achievements-=1;}
-	    if(_homeState.getBear()>0.5){_achievements+=1;}
+	    if(_homeState.getBears()>0.5){_achievements+=1;}
 	}
 
 	if (bill.getEcon()==0){//populist
 	    if(_homeState.getExLeft()>0.5){_achievements+=1;}
 	    if(_homeState.getExRight()>0.5){_achievements-=1;}
-	    if(_homeState.getAvgInc()<26000){_achievements+=1;} }
+	    if(_homeState.getAveInc()<26000){_achievements+=1;} }
 	else if(bill.getEcon()==1){//trickle-down
 	    if(_homeState.getExLeft()>0.5){_achievements-=1;}
 	    if(_homeState.getExRight()>0.5){_achievements+=1;}
-	    if(_homeState.getAvgInc()>100000){_achievements+=1;} }
+	    if(_homeState.getAveInc()>100000){_achievements+=1;} }
 	else if(bill.getEcon()==2){//modernization.globilization
 	    if(_homeState.getExLeft()>0.5){_achievements-=1;}
 	    if(_homeState.getExRight()>0.5){_achievements+=1;}
