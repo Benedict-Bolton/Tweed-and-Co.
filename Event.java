@@ -109,6 +109,7 @@ public class Event{
 
 
     }
+    //try and add two or three more by friday Benedict
     
     public static void main (String[] args) {
 	Event test = new Event("Foreign");
