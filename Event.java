@@ -1,16 +1,19 @@
 /** Class Description of Event
- * @author Benedict Bolton*/
+ * @author Benedict Bolton & Shahruz Ghaemi*/
 public class Event{
     
     /** EVENTS is a constant 2-D array of all possible event that can be generated, in each row is the response options that come with the text of the event*/
     private final String[][] EVENTS = new String[20][5];
     
+    /**_text is the text that is displayed to the user describing the context of the event when the event is printed*/
     private String _text;
+    /**_options are the text for the possible outcomes from each event, there are always four each having a set effect*/ 
     private String[] _options = new String[4];
+    /**_type is the type of the event, being either "Domestic" or "Foreign". Only Foreign has been implemented*/ 
     private String _type; 
     
-    //pre: String type == Domestic || Foreign
-    /** Constructor Description for Event(String) 
+    /**
+     * Event(String) contructs Event objects, of _type type. The _options and _text are randomly choosen from _EVENTS
      * @param type This is String which defines the type of Event that is to be created, it may be either , letter for letter, Domestic or Foreign
      * @return this has no return as it is a constructor
      */
@@ -26,6 +29,10 @@ public class Event{
 	}
     }
     
+    /**
+     * toString() customizes the string output of the Event object
+     * @return Returns first the _text of the Event after a slight introductory string, tehn teh options are returned numerically from least to greatest
+     */
     public String toString() {
 	String ans = "";
 	ans += "There has been another event risen around the world -- " + _text + "\n";
@@ -38,7 +45,16 @@ public class Event{
 	return ans;
     }
     
-    //pre: these are how the world changes based on the option chosen for the event (they all do the same as now, yes it is predictable, but they will need to learn the pattern quickly
+    
+    /**
+     * changeResult(State, double, int) generates the chnages that should occur to the input double worldStable and State usa, based upon the int choice the user has made. The choice represents which of an events option the user choose, with the int corresponding to the option's index.
+     * 
+     * @param usa The homeState of the player who is responding to the events, must not be null
+     * @param worldStable A double representing the worldStability variable within Driver.java, range == [0.0, 50.0]
+     * @param choice int representing the index of the user's choice of response within _options instance variable
+     * 
+     * @return Returns double[] of length 2. double[0] is the change that should occur to usa's averageIncome with the choosen option. double[1] is the change that should occur to worldStability within Driver.java with the choosen option
+     */
     public static double[] changeResult (State usa, double worldStable, int choice) {
 	double[] newStuff = new double[2];
 	if (choice == 0) {
