@@ -64,23 +64,34 @@ public class Driver {
 	whatever = Keyboard.readString();
 	=================================*/
 	
+	double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
+	//passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
+	System.out.println("\tYou have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
+	delay();
 	boolean elected = true;
 	boolean censored = false;
 	boolean arrested = false;
+	int yearsPlayed = 0;
+        State orig = playerState;
 	while (elected) {
-	    //if (public.getAvgInc() <= (orig.getAvgInc() * 0.4)) {  //conditions to get kicked out:
-	    // elected = false;
-	    // continue; }
+	    if (playerState.getAvgInc() <= (orig.getAvgInc() * 0.4)) {  //conditions to get kicked out:
+		elected = false;
+		System.out.println("You have caused devastating effects to the income of your home state due to terrible responses to crisis around the world, as such you have been kicked from office");
+		continue; 
+	    }
+
+	    System.out.println("It is " + year + " time to do some legislating so your home state does not make you out of a job in a few years");
 	    //if (censored) {
 	    // elected = false;
 	    // continue;
 	    //if (arrested) {
 	    // elected = false;
 	    // continue;}
-	    double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
-	    //passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
-	    System.out.println("You have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
-	    delay();
+
+	    /*start an election cycle
+	    if (yearsPlayed%6==0){
+		elected = player.election(playerState);
+		}*/ //defunct for now
 
 	    boolean legislationActive = true;
 	    int passageBill = 0; 
@@ -99,30 +110,32 @@ public class Driver {
 	    while (legislationActive) {  
 		if ( (passageBill == 1) || (passageBill == 2) || (passageBill == 3) ) {
 		    break;
-		    legislationActive = false;
+		    //legislationActive = false;
 		} 
  		Legislation freshBill = new Legislation(); 
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
-		System.out.println("Current support for this bill: "+senate.voteLegis(freshBill)+"%");
+		//System.out.println("Current Senate support for this bill: "+senate.voteLegis(freshBill)+"%"); are we sure we want this, would it be better for the player to have to discover it all?
 		delay();
 		if (powerSource == 0) {
 		    powerName = "Magnificent Hair";
-		    System.out.println("\n\n All the other Senators stare at that perfectly Hairsprayed hair of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.\n\n");
+		    System.out.println("\n\n All the other Senators stare at that perfectly HAIRSPRAYED head of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.\n\n");
 		    delay();
 
 		}
 		else if (powerSource == 1) {
 		    powerName = "Amazing Pin";		    
-		    System.out.println("\n\n It is new, it is shiny, and, by the majestic wings of your beautiful state bird, it is AMERICAN.\n That little American flag pin you put in your lapel this morning has enchanted some of the lesser Senators, your vote now hold theirs in its sway, use the power of your fake patriotism now to attempt to determine the fate of this bill with your vote.\n\n"); delay();
+		    System.out.println("\n\n It is new, it is shiny, and, by the majestic wings of your beautiful state bird, it is AMERICAN.\n That little American FLAG PIN  you put in your lapel this morning has enchanted some of the lesser Senators, your vote now hold theirs in its sway, use the power of your fake patriotism now to attempt to determine the fate of this bill with your vote.\n\n"); 
+		    delay();
 		}
 
 		else {
 		    powerName = "Stupendous Argyle Socks";
-		    System.out.println("\n\n They stand aghast in surprised amazement, could he really be going for it, flaunting the greatest, probably more like the 11th greatest, of Senate Traditions. Yes indeed you had, you wore....gasp!....Argyle Socks! You have thrown aside the tradition of plain dress socks, and as such every like maybe 3 steps the other Senators can sometimes see something that is not quite the color of your pants! This rebliousness inspires, it gives power, and thus you now have the support of some of the Senators, now you can vote to attempt to change the fate of this bill.\n\n"); delay();
+		    System.out.println("\n\n They stand aghast in surprised amazement, could he really be going for it, flaunting the greatest--probably more like the 11th greatest--of Senate Traditions. Yes indeed you, you wore....gasp!....ARGYLE SOCKS! You have thrown aside the tradition of plain dress socks, and as such every 3 steps the other Senators can sometimes see something that is not quite the color of your pants! This rebliousness inspires, it gives power, and thus you now have the support of some of the Senators, now you can vote to attempt to change the fate of this bill.\n\n"); 
+		    delay();
 		}
 		if (passageBill == 0) {
-		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); delay();
+		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); 
 		    String vote = Keyboard.readString();
 		    if (vote.equals("Both")) {
 			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills");
@@ -137,25 +150,25 @@ public class Driver {
 			continue; 
 		    }
 		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
-			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");
+			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");delay();
 		    }
 		    double support = senate.voteLegis(freshBill);
-		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + support + "%");
-		    if (support <= 50) {
+		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + (support*100) + "%");
+		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
 			String[] votesBill = new String[3];
-			votesBill[0] = year;
+			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Fail";
 			votesOnBills.add(votesBill);
 			legislationActive = false;
 		    }
-		    else if (support > 50) {
+		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1;
 			String[] votesBill = new String[3];
-			votesBill[0] = year;
+			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Pass";
 			votesOnBills.add(votesBill);
@@ -170,7 +183,7 @@ public class Driver {
 		
 
 			
-		
+		yearsPlayed+=1;
 	    }//end while (legislationActive)
 
 	    boolean eventOccuring = true;
@@ -191,10 +204,29 @@ public class Driver {
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
 		    eventOccuring = false;
 		}
-	    }//end while(eventOccuring) 	   
+		yearsPlayed+=1;
+	    }//end while(eventOccuring)
+	    
+	    year += 2;
+	    if ( yearsPlayed%6 == 0 ) {
+		int percentSupport =  playerState.popularity( votesOnBills, finishedLegislation );
+		if (percentSupport < 0) {
+		    System.out.println("Well it seems your nearly criminal actions have caught up to you, your repeated support of multiple questionable bills has been noticed by several large media organizations. Well, they love a good story and guess who is the new Lucifer of the Hill. The people are fine electing a scumbag as long as their is no evidence, and they can lie to themselves they elected someone who will help the country. Well, with the evidence on every major cable network your ratings plummted to negative levels (who even knew this was possible?) and you have been promptly impeached from office.");
+		    elected = false;
+		}
+		else if (percentSupport > 50) {
+		    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
+		}
+		else {
+		    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
+		    elected = false;
+		}
+	    } 	   
 
 		
 	}//end while(elected)
+	
+	System.out.println("So your journey has come to an end fair Senator. Thou hast had a good run, doing much in the way of helping one's home state and the world...maybe...or just enjoying all the free stuff, oak panelling, and comfy office chairs your daring appearence granted you. Thinking back you realize you won't miss it much, yes it was semi-not-really enjoyable, but to be honest it did not pay that great. Also the politics seemed to make no sense, it was like everyone voted on capricious whims based on established convictions with no basis in fact....hmm actually looking back US politics is horrible, its great to be out. Now you get to make the real money as a...LOBBYIST!!! ....So another journey begins.); 
 	/*=============================
 =================================*/
     }//end main

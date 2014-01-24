@@ -66,21 +66,29 @@ public class Driver {
 	
 	double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
 	//passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
+	
+	//***PHASING OUT WORLD STABILITY EFFECTS IN ORDER TO GET THIS THING OUT THE DOOR ASAP***
+	//***hopefully we can work on it later***
+	/*
 	System.out.println("\tYou have been told the Senate has a unique system to help keep track of global stability.\n It is a nice simple number, the higher it is the more unstable the world is, the lower the more stable the world is.\n It is conveniently easy for them to keep track of as they spend excess amounts of time with women of questionable repute.\n It currently is: " + worldStability);  
 	delay();
+	*/
+
 	boolean elected = true;
 	boolean censored = false;
 	boolean arrested = false;
 	int yearsPlayed = 0;
         State orig = playerState;
 	while (elected) {
-	    if (playerState.getAvgInc() <= (orig.getAvgInc() * 0.4)) {  //conditions to get kicked out:
+	    if (playerState.getAveInc() <= (orig.getAveInc() * 0.4)) {  //conditions to get kicked out:
 		elected = false;
 		System.out.println("You have caused devastating effects to the income of your home state due to terrible responses to crisis around the world, as such you have been kicked from office");
 		continue; 
 	    }
 
+	
 	    System.out.println("It is " + year + " time to do some legislating so your home state does not make you out of a job in a few years");
+	    System.out.println("======================================");
 	    //if (censored) {
 	    // elected = false;
 	    // continue;
@@ -88,10 +96,6 @@ public class Driver {
 	    // elected = false;
 	    // continue;}
 
-	    /*start an election cycle
-	    if (yearsPlayed%6==0){
-		elected = player.election(playerState);
-		}*/ //defunct for now
 
 	    boolean legislationActive = true;
 	    int passageBill = 0; 
@@ -135,10 +139,10 @@ public class Driver {
 		    delay();
 		}
 		if (passageBill == 0) {
-		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\n You can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:"); 
+		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\nYou can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:\n"); 
 		    String vote = Keyboard.readString();
 		    if (vote.equals("Both")) {
-			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills");
+			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); delay();
 			passageBill = 3;
 			legislationActive = false;
 			finishedLegislation.add(freshBill);
@@ -152,7 +156,7 @@ public class Driver {
 		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
 			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");delay();
 		    }
-		    double support = senate.voteLegis(freshBill);
+		    double support = senate.voteLegis(freshBill,vote,player);
 		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + (support*100) + "%");
 		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
@@ -175,7 +179,8 @@ public class Driver {
 			legislationActive = false;
 		    }
 		}
-		else if ( ( (passageBill == 4) || (passageBill == 5) || (passageBill == 9) ) && (whoDelay == "You") ) {
+		delay();
+		if ( ( (passageBill == 4) || (passageBill == 5) || (passageBill == 9) ) && (whoDelay == "You") ) {
 		    System.out.print("You are are successfully deleying the passage of the bill, yet the opposition has not yet given up and let the bill die. They are matching you inch for inch in this battle of wills. You can 'Continue' to attempt to delay the bill further and hope the opposition surrenders, yet this continued obstructionism can have many dangerous effects, you may want to 'Surrender' and let the bill pass:"); delay();
 			String tactic = Keyboard.readString();
 		}
@@ -184,6 +189,7 @@ public class Driver {
 
 			
 		yearsPlayed+=1;
+		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
 	    }//end while (legislationActive)
 
 	    boolean eventOccuring = true;
@@ -191,23 +197,38 @@ public class Driver {
 		int eventChoice = (int) (Math.random());
 		if (eventChoice == 0) {
 		    Event currentEvent = new Event("Foreign");
-		    System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\n Ahhh *WeeWoo* wait what's that? *WeeWoo* huh? *WeeWooWeeWooWeeWoo* ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it, but he's indisposed...maybe the change has to do with that new intern Ms. Lewinsky...");
+		    if (yearsPlayed == 1){ //only show the first time players are introduced to this mechanism
+			System.out.println("On account of " + powerName + " you have been appointed Chair of the Senate Committee on Foreign Relations. Seeing as it is a normal day there is a sum total of...No One in the committee, but your "+ powerName+ " has given you the courage to actually show up for a fine day of doing absolutely nothing.\n\nAhhh\n\t\t *WeeWoo*\nwait what's that?\n\t\t*WeeWoo*\nhuh?\n\t\t*WeeWooWeeWooWeeWoo*");
+		    }
+		    else{
+			System.out.println("\t\t*WeeWoo* *WeeWoo* *WeeWooWeeWooWeeWoo*");
+		    }
+		    System.out.println("ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it, but he's indisposed...maybe the change has to do with that new intern Ms. Lewinsky..."); 
+		    }
+		    delay();
 		    System.out.println(currentEvent);
+		    System.out.println("=====================================");
 		    System.out.print("Enter the number of the option you wish to pursue: ");
 		    int responseChoice = Keyboard.readInt();
  
 		    double[] response = Event.changeResult (playerState, worldStability, responseChoice);
 		    playerState.setAveInc(playerState.getAveInc() +  (long) (response[0]) );
 		    worldStability += response[1];
+		    /*
 		    System.out.println("Outcome of your decision: ");
 		    System.out.println("Change to National Average Income -- " +response[0]);
 		    System.out.println("Change to Overall World Stability -- " +response[1]);
+		    */
 		    eventOccuring = false;
 		}
 		yearsPlayed+=1;
+		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
+		delay();
 	    }//end while(eventOccuring)
 	    
 	    year += 2;
+
+	    //~~~~~~~~~~~~~~ELEEEEEECTION TIME~~~~~~~~~~~~~~~~
 	    if ( yearsPlayed%6 == 0 ) {
 		int percentSupport =  playerState.popularity( votesOnBills, finishedLegislation );
 		if (percentSupport < 0) {
@@ -218,7 +239,7 @@ public class Driver {
 		    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
 		}
 		else {
-		    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
+		    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " + percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
 		    elected = false;
 		}
 	    } 	   
@@ -226,7 +247,7 @@ public class Driver {
 		
 	}//end while(elected)
 	
-	System.out.println("So your journey has come to an end fair Senator. Thou hast had a good run, doing much in the way of helping one's home state and the world...maybe...or just enjoying all the free stuff, oak panelling, and comfy office chairs your daring appearence granted you. Thinking back you realize you won't miss it much, yes it was semi-not-really enjoyable, but to be honest it did not pay that great. Also the politics seemed to make no sense, it was like everyone voted on capricious whims based on established convictions with no basis in fact....hmm actually looking back US politics is horrible, its great to be out. Now you get to make the real money as a...LOBBYIST!!! ....So another journey begins.); 
+	System.out.println("So your journey has come to an end fair Senator. Thou hast had a good run, doing much in the way of helping one's home state and the world...maybe...or just enjoying all the free stuff, oak panelling, and comfy office chairs your daring appearence granted you. Thinking back you realize you won't miss it much, yes it was semi-not-really enjoyable, but to be honest it did not pay that great. Also the politics seemed to make no sense, it was like everyone voted on capricious whims based on established convictions with no basis in fact....hmm actually looking back US politics is horrible, its great to be out. Now you get to make the real money as a...LOBBYIST!!! ....So another journey begins."); 
 	/*=============================
 =================================*/
     }//end main

@@ -18,6 +18,9 @@ public class Player extends Others{
 	_income = state.getAveInc() * 10;
     }
 
+    //accessors
+    public State getState(){ return _homeState;}
+
     //methods
 
     //~~~~~~~~~~~~~~~~~~~legislative achievement tally~~~~~~~~~~~~~~~~~~~
