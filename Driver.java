@@ -210,7 +210,7 @@ public class Driver {
 			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); playerChoose(senate, player, playerState);
 			passageBill = 3;
 			legislationActive = false;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG a--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -228,7 +228,7 @@ public class Driver {
 		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG b--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -242,7 +242,7 @@ public class Driver {
 		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG c--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -264,7 +264,7 @@ public class Driver {
 
 			
 		yearsPlayed+=1;
-		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
+		//System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
 	    }//end while (legislationActive)
 
 	    boolean eventOccuring = true;
@@ -297,7 +297,7 @@ public class Driver {
 		    eventOccuring = false;
 		}
 		yearsPlayed+=1;
-		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
+		//System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
 		delay();
 	    }//end while(eventOccuring)
 	    
