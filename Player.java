@@ -1,17 +1,40 @@
+/**
+ * Player object is subclass of Others.java; Players creates the object that
+ *<br> the user directly controls and determines the interactions for within Driver.java
+ * @author Shahruz Ghaemi and Benedict Bolton
+ */
 public class Player extends Others{
 
     //INSTANCE VARS
+    /** State from which the player is elected, is the object that decides player's reelection */
     private State _homeState;
+    /** Number of Legislations that has been passed or failed in accordance w/_homeState's interests */
     private int _achievements = 0;
+    /** Political part that player represents, same as majority party in _homeState */ 
     private int _party; //0=republicans, 1=democrats
+    /** Income of player, could be used to determine funds available for use during election season */
     private long _income;
 
     //constructors
+    /**
+     * Default constructor, setting: <br>
+     * homeState to the default State constructor values <br>
+     * _party to Majority party in _homeState <br>
+     * _income to the _averageIncome in _homeState
+     */ 
     public Player(){
 	_homeState = new State();
 	_party = _homeState.getMajority();
 	_income = _homeState.getAveInc();
     }
+    /**
+     * Overloaded constructor, setting: <br>
+     * homeState to the inputted State <br>
+     * _party to Majority party in _homeState <br>
+     * _income to the _averageIncome in _homeState times 10
+     *
+     * @param state state from which Player is elected, will fill _homeState
+     */
     public Player(State state){
 	_homeState = state;
 	_party = state.getMajority();
@@ -19,6 +42,10 @@ public class Player extends Others{
     }
 
     //accessors
+    /**
+     * Accessor method for _homeState
+     * @return _homeState
+     */
     public State getState(){ return _homeState;}
 
     //methods
@@ -27,6 +54,12 @@ public class Player extends Others{
     //calculates a score given to you for your good work (or not-so-good work)
     //representing your state in Congress
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    /** 
+     * Calculates score for Player based on work representing _homeState <br> in accordance with its preferences in the Senate
+     *
+     * @param bill Legislation that was voted on by Player, that affects _homeState in some way
+     * @return int representing achievement in representing _homeState's interests with Player's vote on bill
+     */
     public int legisAchievement(Legislation bill){
 	if (bill.getProp()==2 || bill.getProp()==_party){//bipartisan
 	    _achievements+=1;
@@ -89,6 +122,10 @@ public class Player extends Others{
 
 
     //~~~~~~~~~~~~~~~~~~~~main method for testing~~~~~~~~~~~~~~~~
+    /**
+     * main(String[]) method for testing the code
+     * @param args Unused
+     */
     public static void main(String[] args){
 	State soo = new State();
 	try{soo = new State("New York");}

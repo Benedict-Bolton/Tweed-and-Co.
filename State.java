@@ -1,14 +1,34 @@
 import java.util.*;
+/**
+ * Subclass of Others, is the class that determines Player's reelection,
+ * and provides the instance variables to determine the why the Player should vote
+ *
+ * @author Shahruz Ghaemi and Benedict Bolton
+ */
 public class State extends Others{
     
     //Instance Vars
+    /** All possible Republican majority states */
     String[] _redStates = {"Washington","Montana","Idaho","Wyoming","South Dakota","Nebraska","Kansas","Iowa","Nevada","Utah","Arizona","Alaska","Colorado","New Mexico","Oklahoma","Louisiana","Mississippi","Alabama","Florida","Georgia","South Carolina","Tennessee","Kentucky","Indiana","Ohio","New Hampshire","New Jersey","Delaware"};
+    /** All possible Democrat majority states */
     String[] _bluStates = {"Maine","New York","Massachussetts","Connecticut","Rhode Island","Pennsylvania","Virginia","Vermont","Maryland","West Virginia","North Carolina","Michigan","Wisconsin","North Dakota","Minnesota","Illinois","Missouri","Arkansas","Texas","California","Oregon","Hawaii"};
     String _stateName;
     int redIndex=-1;
     int bluIndex=-1;
     
     //constructor
+    /**
+     * Default constructor for State, randomly chooses whether state will be a red or blue state, <br>
+     * if a Red State the variables are assigned as: <br>
+     * _extremismRight is 0.35 <br>
+     * _extremismLeft is 0.20 <br>
+     * _percentCompRight is 0.65 <br>
+     * _percentCompLeft is 0.35 <br>
+     * _hawkLvl is 45 <br>
+     * _careBearLvl is 40 <br>
+     * _average income is 35000 <br><br>
+     * if a Blue State the variables are assigned the same, excpet _extremismLeft and _extremism Right are swapped, and _percentCompLeft and _percentCompRight are swapped.
+     */
     public State(){
 	int rand = (int)(Math.random()* 2);
 	if (rand==0){
@@ -37,6 +57,14 @@ public class State extends Others{
 	    }
     }
 
+    /**
+     * Overloaded State constructor, it is the same as the default, except for two changes: <br>
+     * The arguement provides the State instead of it being randomly choosen<br>
+     * The extremism of the majority in the State is 0.65 and the minority is 0.50
+     *
+     * @throws Exception exception to be thrown when user enters invalid state name
+     * @param stateName name of state, capitalized, that is chosen by the user
+     */
     public State(String stateName) throws Exception{
 	for(int i=0; i<_bluStates.length; i++){
 	    if (_bluStates[i].equals(stateName)){
@@ -76,6 +104,10 @@ public class State extends Others{
 
 
     //toString method--returns _stateName and other instance vars
+    /**
+     * Overwritten toString method
+     * @return A string representation of the state that calls the method
+     */
     public String toString(){
 	String s ="These are the people of "+_stateName+", your constituents...";
 	s+="\n\t"+round(getCompRight()*100.0)+"% registered Republicans";
@@ -92,6 +124,15 @@ public class State extends Others{
 
     //indicates the State's happiness with a Player parameter
     //returns an int that is popularity in percent
+    /**
+     * Method used to calculate Player's popularity in a State, based on bills Player has passed or Failed.
+     * Popularity then determines whether Player is reelected.
+     *
+     * @param legis ArrayList of Legislation that has been voted on
+     * @param votesOnBills ArrayList of String[] that are the Player's votes, and the result, of all the Legislation in legis. Indices correspond with legis.
+     *
+     * @return An int which is the percent support the player has in the State
+     */
     public int popularity(  ArrayList<Legislation> legis, ArrayList<String[]> votesOnBills) {
 	int percentSupport = 0;
 	int countOfCorruption = 0;
@@ -199,6 +240,11 @@ public class State extends Others{
 	
     //~~~~~~~~~~~~~~~~~returns the majority party in this state~~~~~~~~~~~~~~~~~~~
     //0=republicans, 1=democrats
+    /**
+     * determines majoirty party in state, 0 = republicans, 1 = democrats
+     *
+     * @return The majority party in the state, 1 == democrats, 0 == republicans
+     */
     public int getMajority(){
 	if(getCompRight() > 0.5){return 0;}
 	else if(getCompLeft() > 0.5){return 1;}
@@ -206,6 +252,10 @@ public class State extends Others{
     }
 
     //~~~~~~~~~~~~~~~~~~returns the name of this state~~~~~~~~~~~~~~~~~~~~~~~~
+    /**
+     * Accessor method for _stateName
+     * @return _stateName
+     */
     public String getName(){
 	return _stateName;
     }

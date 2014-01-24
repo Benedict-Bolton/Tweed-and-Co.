@@ -1,32 +1,56 @@
+/**
+ * Legislation proposed in the Senate that will be voted on in Driver.java, 
+ * and determine if the user gets reelected.
+ * @author Benedict Bolton and Shahruz Ghaemi
+ */
 public class Legislation {
 
     //important: http://infohost.nmt.edu/tcc/help/xfer/scp.html
     
     //INSTANCE VARS
-    //text of the bill
+    /** Text of the Bill describing it */
     private String text;
 
-    //all possible bill texts
+    // possible bills
     //8 attributes for each bill == text, econType, socType, forType, proposer, PorkBarrel, selfEnrichment, gerrymandering;
+    /** All possible configurations for instance variables for Legislation, with reference to the location of each Legislation's text in TEXT_REFERENCE */
     private final int[][] POS_BILLS = { {0, 1, 0, 0, 0, -1, 0, 1}, {1, 0, 0, 0, 0, 0, -1, 2}, {2, 0, 0, 0, 0, 0, -1, 2}, {3, 0, 0, 0, 0, -1, 1, 2}, {4, 1, 0, 0, 0, -1, 0, 1}, {5, 2, 0, 0, 0, -1, 2, 2}, {6, 1, 0, 0, 0, -1, 0, 1}, {7, 2, 0, 0, 0, 1, -1, -1}, {8, 0, 0, 0, 0, 0, -1, 2}, {9, 1, 0, 0, 0, 2, -1, 1}, {10, 0, 0, 0, 0, -1, 1, 2}, {11, 1, 0, 0, 0, 1, -1, 1}, {12, 0, 0, 0, 0, 2, 2, 2}, {13, 1, 0, 0, 0, -1, 0, 1}, {14, 1, 0, 0, 0, 2, 2, 1}, {15, 0, 0, 0, 0, -1, 1, 2}, {16, 2, 0, 0, 0, -1, -1, 0}, {17, 2, 0, 0, 0, -1, 2, 1}, {18, 2, 0, 0, 0, 1, -1, 2}, {19, 0, 0, 0, 0, -1, 1, 2}, {20, 2, 1, 0, 0, -1, -1, -1}, {21, 2, 0, 1, 0, -1, -1, -1}, {22, 2, 1, 0, 0, -1, -1, -1}, {23, 2, 0, 0, 1, -1, -1, -1}, {24, 2, 0, 0, 1, -1, -1, -1} };
+    /** String[] containing all possible texts for Legislation */
     private final String[] TEXT_REFERENCE = new String[25];
 
+    /** Party who proposed the Legislation */
     private int propParty; //1 = demo, 0 = repub, 2 = bipartisan
+    /** Whether the Legislation includes porkBarrel spending */
     private int porkBarrel; // 1 = yes, 0 = no
+    /** Whether the Legislation includes spending for self Enrichment */
     private int selfEnrichment; // 1 = yes, 0 = no
+    /** Whether the Legislation includes provisions to support gerrymandering */
     private int gerryMandering; // 1 = yes , 0 = no
 
     //types of bills, form of ints which must be -1, 0, 1, or 2
+    /** Forein Policy Idealogy embraced by the bill, either: <br>
+     * 0 = interventionist, 1 = internationalist, 2 = isolationist, -1 = no policy
+     */
     private int foreignType;
     // 0 = Interventionist, 1 = Internationalist, 2 = Isolationist, -1 = has nothing to do with Foreign Affairs
+    /** Economic Policy Idealogy embraced by the bill, either: <br>
+     * 0 = populist, 1 = supply-side, 2 = Modernization, -1 = no policy
+     */
     private int economicsType;
     // 0 = Populist (Raises jobs, neutral on income, lowers stock market), 1 = Trickle-Down (Raises Jobs and Stock Market, hurts income), 2 = Modernization (Raises Incomes and Stock Market, hurts Jobs, -1 = no effect on economy);
     // -1, 0, 1, 2, 3
+    /** General tone of Idealogy embraced by the bill, either: <br>
+     * 0 = Libertarians, 1 = left-leaning, 2 = right-leaning, -1 = no policy
+     */
     private int socialType;
     // 0 = Libertarians (0% regulation) , 1 = Left-Leaning, 2 = Right-Leaning, 3 = Fascist (100% regulation), -1 = None of the Above
     
+    /** position within POS_BILLS */
     public int position;
     
+    /**
+     * Default Constructor for Legislation, randomly chooses index in POS_BILLS, setting the instance variable to the values and references at that index.
+     */
     public Legislation () {
 	int randChoice = (int) (Math.random() * 25);
 	populateText();
@@ -43,6 +67,9 @@ public class Legislation {
     }
     
     //overriding the good ole' to String (faster than writing out the designations for each bill
+    /** Overwritten tostring method
+     * @return A string repretsentation of the Legislation that calls the method
+     */
     public String toString () {
 	String ans = "";
 	ans += "Text of Legislation -- " + text + "\n======================================\n";
@@ -87,34 +114,71 @@ public class Legislation {
     }
 
     //accessors
+    /**
+     * Accessor method for gerryMandering
+     * @return gerryMandering
+     */
     public int getGerry () {
 	return gerryMandering;
     }
+    /**
+     * Accessor method for selfEnrichment
+     * @return selfEnrichment
+     */
     public int getSelf () {
 	return selfEnrichment;
     }
+    /**
+     * Accessor method for propParty
+     * @return propParty
+     */
     public int getProp () {
 	return propParty;
     }
+    /**
+     * Accessor method porkBarrel
+     * @return porkBarrel
+     */
     public int getPork () {
 	return porkBarrel;
     }
+    /**
+     * Accessor method for socialType
+     * @return socialType
+     */
     public int getSoc () {
 	return socialType;
     }
+    /**
+     * Accessor method for economicsType
+     * @return economicsType
+     */
     public int getEcon () {
 	return economicsType;
     }
+    /**
+     * Accessor method for foreignType
+     * @return foreignType
+     */
     public int getForeign () {
 	return foreignType;
     }
+    /**
+     * Accessor method for text
+     * @return text
+     */
     public String getText() {
 	return text;
     }
+    /**
+     * Accessor method for position
+     * @return position
+     */
     public int getPosition () {
 	return position;
     }
     
+    /** Populates TEXT_REFERENCE with possible Legislation texts */
     public void populateText () {
 	TEXT_REFERENCE[0] = "Nationalized Health Care:\n A National Publically Administrated Health Insurence Policy will be provided by the the Federal Government. It will be subsidized by tax funding, the cost of the heath insurence will be determined by the income of the applicant, and the management of the Public Insurence will create new regulation for the control of the Insurence industry. A government managed online health care exhange will also be created in order to provide an open market where individuals can easily find and purchase their desired insurence.";
 	TEXT_REFERENCE[1] = "Liberate Iraq:\n The government in Iraq has committed genocide against its own citizens, has repeatedly resisted and has been openly hostile to integration of its oil market into the global free market, is horribly corrupt with those close to Saddam Hussein's family having accumulated millions while many live in poverty, and it is a repressive dictatorship that opposes proper AMERICAN freedom and democracy. Saddam's reign ends now, the glorious American military will now liberate the oppressed Iraqi people from their horrid government";
@@ -143,7 +207,9 @@ public class Legislation {
 	TEXT_REFERENCE[24] = "Rid the Nation of Voter Fraud:\n New more extensive voter registration laws shall be implemented across the United States to prevent voter fraud so that the outcome of elections can be ensured to be honest. The nature and implementation of these new laws shall be determined by the Senators from each state as they fully represent their whole state and thus have the most knowledge and connections for implementation about and throughout their state."; 
     }
     
-    
+    /** main(String[]) tests class functionality
+     * @param args Unused
+     */
     public static void main (String[] args) {
 	Legislation test = new Legislation();
 	System.out.println(test);

@@ -31,7 +31,7 @@ public class Event{
     
     /**
      * toString() customizes the string output of the Event object
-     * @return Returns first the _text of the Event after a slight introductory string, then the options are returned numerically from least to greatest
+     * @return The _text of the Event after a slight introductory string, then the options are returned numerically from least to greatest
      */
     public String toString() {
 	String ans = "";
@@ -53,7 +53,7 @@ public class Event{
      * @param worldStable A double representing the worldStability variable within Driver.java, range == [0.0, 50.0]
      * @param choice int representing the index of the user's choice of response within _options instance variable
      * 
-     * @return Returns double[] of length 2. double[0] is the change that should occur to usa's averageIncome with the choosen option. double[1] is the change that should occur to worldStability within Driver.java with the choosen option
+     * @return double[] of length 2; double[0] is the change that should occur to usa's averageIncome with the choosen option. double[1] is the change that should occur to worldStability within Driver.java with the choosen option
      */
     public static double[] changeResult (State usa, double worldStable, int choice) {
 	double[] newStuff = new double[2];
@@ -130,6 +130,7 @@ public class Event{
     
     /**
      * main(String[] args) tests the methods within the array by printing and constructing an Event object of type "Foreign"
+     * @param args Unused
      */
     public static void main (String[] args) {
 	Event test = new Event("Foreign");

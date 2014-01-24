@@ -1,14 +1,36 @@
+/**
+ * subClass of Others representing the US senate, to determine their specific 
+ * votes and support for various pieces of legislation and the Player's actions
+ *
+ * @author Shahruz Ghaemi and Benedict Bolton
+ */
 public class Senate extends Others{
     
     //Instance Vars
 
 
     //Constructors
-    //default constructor--creates random Senate 
+    //default constructor--creates random Senate
+    /**
+     * Uses same default consturtor as Others.java
+     */
     public Senate(){
 	super();
     }
     //For use in game constructor
+    /**
+     * Overloaded Senate Constructor for start of Driver main(String[]),
+     * Setting: <br>
+     * _extremismRight to 0.35;
+     * _extremismLeft to 0.20;
+     * _percentCompRight to 0.55;
+     * _percentCompLeft to 0.20;
+     * _hawkLvl to 45;
+     * _careBearLvl to 40;
+     * _averageIncome to $450,000 yearly
+     *
+     * @param year year within the driver when called, this constructor should only run when year == 1996 (the start year)
+     */ 
     public Senate(int year){
 	this();
 	if(year==1996){//creates a 1996 Senate (beginning of Clinton's second term)
@@ -24,6 +46,10 @@ public class Senate extends Others{
     }
 
     //toString method--displays all instance variables
+    /** 
+     * Overwritten toString method for Senate
+     * @return A string representation of the calling Senate object
+     */
     public String toString(){
 	String s ="This is what the Senate looks like...";
 	s+="\n\t"+round(getCompRight()*100.0)+" Republican Senators";

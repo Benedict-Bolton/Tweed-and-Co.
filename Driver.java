@@ -1,7 +1,15 @@
 import cs1.Keyboard;
 import java.util.*;
+/** 
+ * Main functional Method for Senate Simulator, containing the while loops <br>
+ * that provide the game and repeating prompt functionality. <br>
+ * Also the location of most of the actual class interactions.
+ *
+ * @author Benedict Bolton and Shahruz Ghaemi
+ */
 public class Driver {
     
+    /** Simple, It is a Uncle Sam and Good Old Stars and Stripes, in fine ascii glory */
     private static final String americanFlag = 
 	"\n=============;===========;()                       " 
 	+"\n            # # # #::::::            _..._        " 
@@ -14,6 +22,7 @@ public class Driver {
 	+"\n            # # # # # # #          \\|  _\\ |/      "
 	+"\n            # # # # # # #           \\  -  /       " 
 	+"\n jgs        # # # # # # #       jgs  '{_}`        ";
+    /** Do as the ASCII art tells you, its actually really really important, in life (this 'game' too) */
     private static final String vote = 
 	"\n__      __  ___   _______  _____ "
 	+"\n\\ \\    / / / _ \\ |___ ___||  ___|"
@@ -22,12 +31,19 @@ public class Driver {
 	+"\n   \\  /   | |_| |   | |   | |___ "
 	+"\n    \\/     \\___/    |_|   |_____]";
    
+    /** Creates small delay, and break in text to seperate prompts */
     public static void delay(){ //simple mechanism to provide a chance for the player to read the text on-screen
 	System.out.println("======================================");
 	System.out.print("Enter anything to proceed  ");
 	String whatever = Keyboard.readString();
     }
 
+    /**
+     * Sets up Senate object as it should be for Driver's functionality. <br>
+     * Then prints senate to inform the user of its composition.
+     *
+     * @return senate that is to be interacted with in the Driver loops
+     */
     public static Senate generateSenate(int year){
         //world-create Senate, show Senate
 	System.out.println("=====================================");
@@ -37,6 +53,12 @@ public class Driver {
 	return senate;
     }
 
+    /**
+     * Sets up State object as it should be for Driver's functionality. <br>
+     * Prompts user to enter state of their choosing for their homeState, <br>
+     * Then prints homeState to inform the user of its status.
+     * @return senate that is to be interacted with in the Driver loops
+     */
     public static State generateState(){	
 	boolean trigger = true;
 	String ans = "";
@@ -62,10 +84,24 @@ public class Driver {
 	delay();
 	return homeState;
     }//end generateState
-
+    /** creates the Player object that will be going through the game
+     * @return the instantiated Player
+     */
     public static Player generatePlayer(State homeState){
 	return new Player(homeState);
     }
+
+    /**
+     * Helper function to handle elections, and responding to their result. <br>
+     * Runs popularity(ArrayList<String[]>, ArrayList<Legislation>) to find election results, <br>
+     * then prints the appropriate response) 
+     * 
+     * @param playerState the State that is running popularity(ArrayList<String[]>, ArrayList<Legislation>)
+     * @param l one parameter for popularity(ArrayList<String[]>, ArrayList<Legislation>)
+     * @param s other parameter for popularity(ArrayList<String[]>, ArrayList<Legislation>)
+     *
+     * @return A true if reelected, a false if removed from office
+     */
 
     public static boolean electionTime(State playerState, ArrayList<Legislation> l, ArrayList<String[]> s){
 	System.out.println("6 years have passed, your term is up...time to get back on the stump and try to keep your job...");
@@ -85,8 +121,8 @@ public class Driver {
 	}
     }
 
-    //replaces the delay() method in certain situations
-    //lets the player refer back to the stats of the senate and their homeState to facilitate informed decision-making
+    /** replaces the delay() method in certain situations; <br>
+     * Lets the player refer back to the stats of the senate and their homeState to facilitate informed decision-making */
     public static void playerChoose(Senate senate, Player player, State playerState){
 	System.out.println("======================================");
 	String s = "What would you like to do? Enter the number of your choice";
@@ -106,7 +142,17 @@ public class Driver {
 	else if (choice == 3){}//do nothing
     }
 
-
+    /** 
+     * main(String[]) contains the loops that cause the functionality of Driver. <br>
+     * while(elected) is overarching loop determining if game is running. <br>
+     * while(legislationActive) is for while legislation is being voted upon <br>
+     * while(evenOccuring) is while events are being responeded to <br>
+     * Three major events occur in each iteration of while(elected); <br>
+     * Voting on Legislation, responding to Events, checking stats, <br>
+     * and every three iterations dealing with releection.
+     *
+     * @param args Unused
+     */
     public static void main( String[] args ) {
 	int year = 1996;
 	System.out.println("The year is "+year);
