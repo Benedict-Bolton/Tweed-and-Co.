@@ -1,0 +1,222 @@
+
+==========================================================================
+DEVELOPMENT LOG
+A project by: Benedict Bolton, Shahruz Ghaemi
+              Tweed & Co., Inc.
+              Premium Election Riggers, Graft Dispensers, & Corruptioneers
+              New York, New York
+==========================================================================
+
+
+         ()__                 ()__               ()__
+         ||**Z__              ||**Z__            ||**Z__
+         ||**|**=Z____        ||**|**=Z____      ||**|**=Z____
+         ||**|**=|====|       ||**|**=|====|     ||**|**=|====|   
+         ||==|**=|====|       ||==|**=|====|     ||==|**=|====|
+         ||""|===|====|       ||""|===|====|     ||""|===|====|
+         ||  `"""|====|       ||  `"""|====|     ||  `"""|====|
+     jgs ||      `""""`	      ||      `""""`     ||      `""""`   
+==========================================================================         
+	   ____    __             ___   ____   ____   ___    ___
+	  /	  /  \  |\    |  /   \ |    \ |   `  /   \  /   \
+ 	 |	 |    | | \   | |      |    / |     |      |
+ 	 |	 |    | |  \  | |      |----  |---   \___   \___
+  	 |	 |    | |   \ | |  --^ |   \  |          \      \
+      	  \____   \__/  |    \|  \___/ |    \ |____  \___/  \___/
+       ___   _____        ___  ___ ___      __   _______  ____   ____
+      /   \    |   |\  /|  |    |   |      /  \     |    / __ \  |   \
+      \___     |   | \/ |  |    |   |     | /\ |    |    | || |  |___/
+          \    |   |    |  |    |   |   _ | || |    |    | || |  |  \
+      \___/  __|__ |    |   \__/    |___| |    |    |    \____/  |   \
+
+===========================================================================
+LOG OF NON-CORRUPTION RELATED TRANSACTIONS
+     --nothing to see here, IRS--
+
+2014-1-8: began working on project, this simulator developed out of one of Ben's proposals
+	  GitHub repo created ( Tweed-and-Co. )
+
+2014-1-9: tested pushing and pulling simple .txt files to the repo, from school
+          
+2014-1-10: began diagramming and flow-charting the project
+	   started with the idea of many classes with similar instance variables whose values would affect and be affected by decisions made by other classes
+	   started with the idea of two superclasses of Objects: those that change world variables (Generating) and those whose variables are changed (Affected)
+
+2014-1-12: tested pushing and pulling capabilities from home
+
+2014-1-13: refined and focused our UML diagrams
+    	   the Affected class of Objects would be the superclass of:
+		--Senate, representing the 99 other Senators as a collective 
+		--Public, representing the economy and general war-/peace-sentiments of the populace
+		--District, representing the political demographics of the player's constituents
+	   the classes that would generate changes (though not necessarily descended from a superclass):
+		--Player, representing the player's Senator
+		--Driver, representing the simulated world and containing all the loops and instantiated Objects necessary for gameplay
+
+2014-1-14: typed up first .java file and pushed to repo
+	   this was the Affected superclass 
+	   for some reason, called it Others.java
+	   created the instance variables we deemed necessary for all subclasses:
+		--(double) the percent composition of each party
+		--(double) the percent extremism/willingness to compromise of each party    
+    		--(long) the average income of the person/collection of persons represented
+		--(int) the level of gung-ho, gun-toting, democracy-spreading spirit (named by Benedict as _hawkLvl)
+		--(int) the level of thoughtful, world-peace-promoting willingness to co-operate in the international framework 
+		        (named by Ben as _careBearLvl because of the children's toys Care Bears and also because of the animal-naming precedent)
+	  planned for the Public and District subclasses to also have:
+		--an instance variable representing the number of jobs (aka the health of the economy)
+	  wrote accessors for these instance variables in Others.java 
+	  cooperated on Ben's machine in class to code
+
+2014-1-15: created the voteLegis() method in superclass Others [Ben]
+	   this method takes in a certain piece of Legislation and calculates the Object's support for said Legislation based on how well its instance variables match up with the type of bill
+	   created the Legislation class, empty for now [Ben]
+	   beginnings of deviation from carefully structured UML diagrams: for example, Legislation is neither affect-generating nor affected
+	   created the Senate class, with only a randomizing default constructor [Shahruz]
+	   added mutators to superclass Others [Shahruz]
+
+2014-1-16: created the Driver [Ben]
+	   set up the beginnings of gameplay loops: [Ben]
+		--while the player is elected, present a series of Legislations for the player to vote up or down, or stall in the Senate with a variety of tactics
+ 	   in class, determined that the economic policy of a Legislation passed would affect the world variables:
+		--populist bills increase jobs, do not affect average income, and lower the stock market
+		--trickle-down bills increase jobs, decrease average income, and raise the stock market
+		--modernising/outsourcing bills lower jobs, raise income, and raise stocks
+	   planned that if jobs fell too far, something bad would happen
+	   gave Legislation some instance variables: [Ben]
+		--the text of the bill
+		--the economic policy (populist, trickle-down, neutral, or none)
+		--the social policy (liberal, conservative, facist, libertarian, or none)
+		--the foreign policy (American assertion, cooperation with other countries, isolationism, or none)
+	   began to implement the voteLegis() method: [Shahruz]
+		--a bill automatically gains the support of 30% of the party that proposed it
+		--a bill gains Republican votes for being economically or socially conservative and for being aggressive in foreign policy
+		--a bill gains Democratic votes for being economically populist or socially liberal and for being accomodating in foreign policy
+	   typed up 13 bills (13!!!) [Ben]
+	   created a 2-D array (int[][]) to hold Legislations at the top level and the Legislation's attribute values in the secondary level [Ben]
+
+2014-1-17: worked on world generation in Driver, creating a Senate and a State (replacing the idea of the District class, but still representing the players' constituents)
+	   created State class, State is-a Others [Shahruz]
+	   State has the following:
+		--a String stateName instance variable, self-explanatory
+		--a constructor that takes a String input and determines if that input state name is a Republican-leaning or Democrat-leaning state
+	   created Event class, empty for now
+
+2014-1-18: added instance variables for Legislation: [Ben]
+		--(int) propParty, 0 for Republican-proposed and 1 for Democrat-proposed, 2 for Bipartisan-support
+		--(int) porkBarrel, 0 for no and 1 for a bill that does underhandedly appropriate funds for the player's own constituents
+		--(int) selfEnrichment, 0 for no and 1 for a bill that does secretly increase the player's own salary
+	   added 5 corrupt bills that either appropriate funds sneakily or enrich the player, etc etc [Ben]
+	   added accessor methods for all Legislation's new instance variables [Ben]
+	   created a toString() for Legislation that pritns out the text of the bill as well as textual indications of the bill's attributes (its economic policy, its corruption, etc etc)
+	   worked on world generation in Driver: [Shahruz]
+		--compartmentalized functions for generating Senate, State objects
+		--added text at the beginning
+		--used the imported cs1 Keyboard class to get user-input prompts for creating a senator from a State of the player's input
+	   thought about renaming the oddly-named Others superclass into Actors or even back to Affected, this never happened 
+	   added an array to hold the Legislations already completed (whether passed, failed, or stalled in Congress) [Ben]
+	   added another array to hold connected information about the player's individual vote on the bill [Ben]
+
+2014-1-19: fleshed out Events class: [Ben]
+		--holds 20 events happening overseas
+		--each event has 4 possible choices for the player to make (correspond to aggressiveness, accomodation, isolationism, and humanitarian)
+	   worked on Driver loop-sequence: [Ben]
+		--after a Legislation is finished (passed, failed, sent to bill hell), an Event occurs
+		--there is a while-legislation-occuring loop followed by a while-event-occuring loop during one iteration of the while-elected loop
+		--added text that indicates the player's awesome personal charisma can significantly alter the vote in the Senate on a Legislation
+	   added toString() to State and Senate: [Shahruz]
+		--print out the political composition of the object
+		--prints out the political extremism of both parties
+		--displays the _hawkLvl, _careBearLvl, and average income
+	   incorporated error handling into world generation: [Shahruz]
+		--added exception-throwing to the State overloaded constructor
+		--if the player-input String is not one of the 50 states, the constructor throws an Exception
+		--had a lot of hassle getting the try-catch flow to get by the compiler
+
+2014-1-20: worked on the voteLegis() method in superclass Others: [Shahruz]
+		--a bill gets the non-extremist votes of both parties for being Bipartisan-proposed 
+		--a bill gets some Democratic votes and more Republican votes for being economically modernising
+		--a bill gets Democratic votes for being economically populist
+		--a bill gets Republican votes for being trickle-down
+		--a bill gets the hawkish Republicans and some hawkish Democrats for being aggressive in foreign policy
+		--a bill gets the caring Democrats and some caring Republicans for being internationalist/"UN hippie stuff"
+		--a bill loses support (gets only negative votes) for being isolationist
+		--a bill gets Republican votes for being socially conservative
+		--a bill gets Democratic votes for being socially liberal
+		--these numbers were all worked out by adding to the support the number of votes remaining * a multiplier (usually based on the extremism levels)
+	   created a delay() method in Driver to stop and ask for user input, to allow the player to read on-screen text [Shahruz]
+	   created the legisAchievement() method in Player: [Shahruz]
+		--takes a Legislation input
+		--to tally up how well the player did on a specific Legislation in the eyes of the constituents 
+		--based on the homeState majority party 
+		--if this bill is Democratic and passes while the player represents a Republican state, the score will be lower (possible negative)
+	   streamlined Driver [Shahruz]
+	   everything gameplay-ready up until the player casts a vote for a Legislation
+	   began working on javadocs [Ben]
+	   added outcomes and text-indicators for the fate of a Legislation based on the support calculated in voteLegis() [Ben]
+
+2014-1-21: in Driver, added each successive piece of Legislation to an ArrayList<Legislation> (whether passed, failed, or stalled) [Ben]
+	   corollay, added the player's individual vote on that Legislation to an ArrayList<String> [Ben]
+		--to be accessed by State in determining the player's job performance come election time
+	   math wasn't coming out right in voteLegis, so added diagnostic outputs [Shahruz]
+	   
+2014-1-22: improved the math in voteLegis() by eliminating some of the factors that could affect it [Shahruz]
+	   discovered the Math.rint() method which rounds a messy double to two decimal places, used it in Others to return two-digit doubles in voteLegis() [Shahruz]
+	   incorporated the beginnings of an election loop: [Ben]
+		--every 6 years, the player's home State gets to evaluate his performance in office
+		--player can be kicked out of game if found unsatisfactory
+		--6 years determined by 3 Legislations and 3 Events (aka 1 while(elected) iteration = 2 years)
+	   wrote a popularity() method in State: [Ben]
+		--takes an ArrayList<Legislation> input, representing the Legislation passed by Congress
+		--takes an ArrayList<String> input, representing the player's vote on the corresponding Legislation
+		--if the player voted FOR a bill the State didn't like, his popularity goes down, and vice versa
+		--bills the state likes determined by the majority party in the State
+		--Republican, trickle-down, socially conservative bills not popular in Democratic states
+	   popularity() in State trying to accomplish the same thing as legisAchievement() in Player:
+		--we decided to go with popularity() in State
+		--since Driver already contained an ArrayList<Legislation> for finished legislations and an ArrayList<String> for the player's votes
+
+2014-1-23: added javadocs comments [Ben]
+	   polished Driver up by including more delay() [Shahruz]
+	   wrote the playerChoose() in Driver to give the player a chance to review the statistics of Senate or his home state before voting on a bill [Shahruz]
+	   added ending text [Ben]
+	   added election mechanism which tabulates popularity and returns the results (if the player got re-elected or not) [Ben]
+	   compartmentalized the election mechanism into a separate function in Driver [Shahruz]
+	   added ASCII art to the election mechanism of the American flag, Uncle Sam to get that patriotic vibe [Shahruz]
+	   general touch-ups prior to alpha release [Shahruz]
+====================================================================================
+Obstacles Overcome
+
+====================================================================================
+Unresolved Issues
+
+There are many aspects to this simulator that we started out with that we didn't get to incorporate into the final version.
+We originally envisioned a much wider world-simulator, with the political demographics of the nation changing every few
+years or so as each party rose in one place. Having this fluctuation in the player's own state would make for more challenging
+gameplay. The player would have to respond to the new political trends, not just sticking with the same old schtick.
+
+In addition, our code was not written in the most organized manner. As we went along, we found we needed methods
+here or there that we found a way around using later. So we kind of picked up things that aren't all completely utilized
+in the final version. There was lots of commenting-out happening during this project as we experimented with what worked.
+
+Another issue is that the number-crunching in some of our functions, specifically popularity() in the State class, is still
+wonky. It took a couple of days just to troubleshoot the number-crunching problems in other functions. The problem has to
+stem from the complexity of the task. There are so many variables that we take into account when calculating support
+for a politician or for a legislation that it's no wonder something somewhere along the line is off-center.
+====================================================================================
+Cool Things Learned
+
+Shahruz--I decided to incorporate try-catch Exception handling into this project. Luckily I only tested it on one method 
+	because it was a 2-hour hassle. Trying to understand the syntax from the textbook and internet resources was the hardest
+	part. Conceptually it's very simple, but it's aways the specificity of the syntax that gets me. It was a useful
+	exercise in learning flow-control, because the compiler's "no-go" error messages prompted me to go back and trace
+	through my code to see what exactly was going on.
+
+
+====================================================================================
+Mid-Developmental Design Changes (and why)
+
+====================================================================================
+Lesson Learned 
+
+1. Aim small. Place the expectations bar low. That way you'll be sure to acheive it. Then see where you can go from there.

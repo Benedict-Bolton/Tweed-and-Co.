@@ -109,14 +109,17 @@ public class Driver {
 	int percentSupport =  playerState.popularity(l,s);
 	if (percentSupport < 0) {
 	    System.out.println("Well it seems your nearly criminal actions have caught up to you, your repeated support of multiple questionable bills has been noticed by several large media organizations. Well, they love a good story and guess who is the new Lucifer of the Hill. The people are fine electing a scumbag as long as their is no evidence, and they can lie to themselves they elected someone who will help the country. Well, with the evidence on every major cable network your ratings plummted to negative levels (who even knew this was possible?) and you have been promptly impeached from office.");
+	    delay();
 	    return false;
 	}
 	else if (percentSupport > 50) {
 	    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
+	    delay();
 	    return true;
 	}
 	else {
 	    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " + percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
+	    delay();
 	    return false;
 	}
     }
@@ -253,7 +256,7 @@ public class Driver {
 			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); playerChoose(senate, player, playerState);
 			passageBill = 3;
 			legislationActive = false;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG a--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -271,7 +274,7 @@ public class Driver {
 		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG b--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -285,7 +288,7 @@ public class Driver {
 		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1;
-			//System.out.println(finishedLegislation.add(freshBill) );
+			finishedLegislation.add(freshBill);
 			//System.out.println("***DIAG c--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
@@ -307,7 +310,7 @@ public class Driver {
 
 			
 		yearsPlayed+=1;
-		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
+		//System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
 	    }//end while (legislationActive)
 
 	    boolean eventOccuring = true;
@@ -340,7 +343,7 @@ public class Driver {
 		    eventOccuring = false;
 		}
 		yearsPlayed+=1;
-		System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
+		//System.out.println("***DIAG--yearsPlayed*** "+yearsPlayed+" / 6 = "+yearsPlayed%6);
 		delay();
 	    }//end while(eventOccuring)
 	    

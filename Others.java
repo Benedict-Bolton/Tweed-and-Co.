@@ -244,23 +244,23 @@ public class Others {
 	    if(player.getState().getMajority()==0){//republican playerState
 		support+=percentRight*0.5;
 		percentRight*=0.5;
-		System.out.println("***DIAG--R senator swayed R in favor*** "+support);
+		//System.out.println("***DIAG--R senator swayed R in favor*** "+support);
 	    }
 	    else if(player.getState().getMajority()==1){//democratic playerState
 		support+=percentLeft*0.5;
 		percentLeft*=0.5;
-		System.out.println("***DIAG--D senator swayed D in favor*** "+support);
+		//System.out.println("***DIAG--D senator swayed D in favor*** "+support);
 	    }
 	}
 
 	else if (playerVote.equals("Against")){
 	    if(player.getState().getMajority()==0){//republican playerState
 		percentRight*=0.5;
-		System.out.println("***DIAG--R senator swayed R against*** "+support);
+		//System.out.println("***DIAG--R senator swayed R against*** "+support);
 	    }
 	    else if(player.getState().getMajority()==1){//democratic playerState
 		percentLeft*=0.5;
-		System.out.println("***DIAG--D senator swayed D against*** "+support);
+		//System.out.println("***DIAG--D senator swayed D against*** "+support);
 	    }
 	}
 	
@@ -270,12 +270,12 @@ public class Others {
 	if(proposedBy.equals("Republican")){
 	    support+=percentRight*0.3;
 	    percentRight*=0.7;
-	    System.out.println("***DIAG--proposed R*** "+support);
+	    //System.out.println("***DIAG--proposed R*** "+support);
 	}
 	else if(proposedBy.equals("Democrat")){
 	    support+=percentLeft*0.3;
 	    percentLeft*=0.7;
-	    System.out.println("***DIAG--proposed D*** "+support);
+	    //System.out.println("***DIAG--proposed D*** "+support);
 	}
 	else if(proposedBy.equals("Bipartisan")){
 	    //get the non-extremists of both parties
@@ -283,20 +283,20 @@ public class Others {
 	    percentRight=(_extremismRight);
 	    support+=percentLeft*(1.0-_extremismLeft);
 	    percentLeft=(_extremismLeft);
-	    System.out.println("***DIAG--proposed R-D*** "+support);
+	    //System.out.println("***DIAG--proposed R-D*** "+support);
 	}
 	//economic factors
 	if(bill.getEcon() == 0){ //populist
 	    double temp = percentLeft*_extremismLeft*0.3;
 	    support+=temp;
 	    percentLeft-=temp;
-	    System.out.println("***DIAG--populist*** "+support);
+	    //System.out.println("***DIAG--populist*** "+support);
 	}
 	else if(bill.getEcon() == 1){ //trickle-down
 	    double temp = percentRight*_extremismRight*0.3;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG--trickledown*** "+support);
+	    //System.out.println("***DIAG--trickledown*** "+support);
 	}/*
 	else if(bill.getEcon() == 2){ //modernism, globilisation
 	    //mostly get Republican support, some Democratic
@@ -306,7 +306,7 @@ public class Others {
 	    double temp2 = percentLeft*0.4;
 	    support+= temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG--globilise*** "+support);
+	    //System.out.println("***DIAG--globilise*** "+support);
 	}*/
 	//foreign policy
 	if(bill.getForeign()==0){//intervention, 'MURICA HELL YEAH
@@ -317,7 +317,7 @@ public class Others {
 	    //Dems generally dislike intervention
 	    support+=temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG--intervene*** "+support);
+	    //System.out.println("***DIAG--intervene*** "+support);
 	}
        	else if(bill.getForeign()==1){//international, the UN and world peace
 	    double temp1 = percentRight*(_careBearLvl/100.0)*0.5;
@@ -327,7 +327,7 @@ public class Others {
 	    double temp2 = percentLeft*(_careBearLvl/100.0);
 	    support+=temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG--UN*** "+support);
+	    //System.out.println("***DIAG--UN*** "+support);
 	}
 	/*else if(bill.getForeign() ==2){//isolationist, alienates people who want to get involved
 	    double temp1 = percentRight*(1-_careBearLvl);
@@ -336,36 +336,36 @@ public class Others {
 	    double temp2 = percentLeft*(1-_careBearLvl);
 	    support+=temp2;
 	    percentLeft-=temp2;
-	    System.out.println("***DIAG*** "+support);
+	    //System.out.println("***DIAG*** "+support);
 	    }*/
 	//social factors
 	/*if(bill.getSoc()==0){//libertarian
 	    double temp = percentRight*_extremismRight;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG--libertarian*** "+support);
+	    //System.out.println("***DIAG--libertarian*** "+support);
 	    }*/
 	if(bill.getSoc()==1){//left-leaning
 	    double temp = percentLeft*0.7;
 	    support +=temp;
 	    percentLeft-=temp;
-	    System.out.println("***DIAG--lefty*** "+support);
+	    //System.out.println("***DIAG--lefty*** "+support);
 	}
 	else if(bill.getSoc()==2){//right-leaning
 	    double temp=percentRight*0.7;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG--righty*** "+support);
+	    //System.out.println("***DIAG--righty*** "+support);
 	}/*
 	else if(bill.getSoc()==3){//all-regulation
 	    double temp=percentLeft*_extremismLeft;
 	    support+=temp;
 	    percentRight-=temp;
-	    System.out.println("***DIAG--facist*** "+support);
+	    //System.out.println("***DIAG--facist*** "+support);
 	    }*/
 	support = round(support);
 
-	System.out.println("***DIAG*** "+support);
+	//System.out.println("***DIAG*** "+support);
 	return support;
     }
 
