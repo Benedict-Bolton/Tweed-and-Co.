@@ -2,6 +2,26 @@ import cs1.Keyboard;
 import java.util.*;
 public class Driver {
     
+    private static final String americanFlag = 
+	"\n=============;===========;()                       " 
+	+"\n            # # # #::::::            _..._        " 
+	+"\n            # # # #::::::           |||||||       " 
+	+"\n            # # # #::::::           |||||||       " 
+	+"\n            # # # #::::::         __|*****|__     " 
+	+"\n            # # # # # # #         ( '-...-' )     " 
+	+"\n            # # # # # # #         {`;-----;`}     "   
+	+"\n            # # # # # # #         {(| a  a|)}     "
+	+"\n            # # # # # # #          \\|  _\\ |/      "
+	+"\n            # # # # # # #           \\  -  /       " 
+	+"\n jgs        # # # # # # #       jgs  '{_}`        ";
+    private static final String vote = 
+	"\n__      __  ___   _______  _____ "
+	+"\n\\ \\    / / / _ \\ |___ ___||  ___|"
+	+"\n \\ \\  / / | | | |   | |   | |___ "
+	+"\n  \\ \\/ /  | | | |   | |   |  ___|"
+	+"\n   \\  /   | |_| |   | |   | |___ "
+	+"\n    \\/     \\___/    |_|   |_____]";
+   
     public static void delay(){ //simple mechanism to provide a chance for the player to read the text on-screen
 	System.out.println("======================================");
 	System.out.print("Enter anything to proceed  ");
@@ -47,6 +67,25 @@ public class Driver {
 	return new Player(homeState);
     }
 
+    public static boolean electionTime(State playerState, ArrayList<Legislation> l, ArrayList<String[]> s){
+	System.out.println("6 years have passed, your term is up...time to get back on the stump and try to keep your job...");
+	System.out.println(americanFlag + vote);
+	int percentSupport =  playerState.popularity(l,s);
+	if (percentSupport < 0) {
+	    System.out.println("Well it seems your nearly criminal actions have caught up to you, your repeated support of multiple questionable bills has been noticed by several large media organizations. Well, they love a good story and guess who is the new Lucifer of the Hill. The people are fine electing a scumbag as long as their is no evidence, and they can lie to themselves they elected someone who will help the country. Well, with the evidence on every major cable network your ratings plummted to negative levels (who even knew this was possible?) and you have been promptly impeached from office.");
+	    return false;
+	}
+	else if (percentSupport > 50) {
+	    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
+	    return true;
+	}
+	else {
+	    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " + percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
+	    return false;
+	}
+    }
+
+
     public static void main( String[] args ) {
 	int year = 1996;
 	System.out.println("The year is "+year);
@@ -79,6 +118,8 @@ public class Driver {
 	boolean arrested = false;
 	int yearsPlayed = 0;
         State orig = playerState;
+	ArrayList<Legislation> finishedLegislation = new ArrayList<Legislation>();
+	ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first(your vote), for the second it is the result, yes no or hell
 	while (elected) {
 	    if (playerState.getAveInc() <= (orig.getAveInc() * 0.4)) {  //conditions to get kicked out:
 		elected = false;
@@ -107,8 +148,8 @@ public class Driver {
 	    //5 = being delayed by filibuster, 
 	    //9 = total delay attack
 	    Event lastEvent;
-	    ArrayList<Legislation> finishedLegislation = new ArrayList<Legislation>();
-	    ArrayList<String[]> votesOnBills = new ArrayList<String[]>(); //tied to array just above this, three options are Yes, No, delay for the first(your vote), for the second it is the result, yes no or hell
+
+	
 	    int powerSource = (int) (Math.random() * 3);
 	    String powerName = "";
 	    while (legislationActive) {  
@@ -145,7 +186,9 @@ public class Driver {
 			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); delay();
 			passageBill = 3;
 			legislationActive = false;
-			finishedLegislation.add(freshBill);
+			System.out.println(finishedLegislation.add(freshBill) );
+			System.out.println("***DIAG a--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
 			votesBill[1] = "Delay";
@@ -161,22 +204,30 @@ public class Driver {
 		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
+			System.out.println(finishedLegislation.add(freshBill) );
+			System.out.println("***DIAG b--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Fail";
 			votesOnBills.add(votesBill);
 			legislationActive = false;
+
 		    }
 		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1;
+			System.out.println(finishedLegislation.add(freshBill) );
+			System.out.println("***DIAG c--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
 			votesBill[1] = vote;
 			votesBill[2] = "Pass";
 			votesOnBills.add(votesBill);
 			legislationActive = false;
+
 		    }
 		}
 		delay();
@@ -204,7 +255,7 @@ public class Driver {
 			System.out.println("\t\t*WeeWoo* *WeeWoo* *WeeWooWeeWooWeeWoo*");
 		    }
 		    System.out.println("ITS THE ALARM! There is a new crisis somewhere in the world, and the Senate for once (meaning you) has to deal with it! The president always took care of it, but he's indisposed...maybe the change has to do with that new intern Ms. Lewinsky..."); 
-		    }
+		    
 		    delay();
 		    System.out.println(currentEvent);
 		    System.out.println("=====================================");
@@ -227,28 +278,16 @@ public class Driver {
 	    }//end while(eventOccuring)
 	    
 	    year += 2;
-
+	    
 	    //~~~~~~~~~~~~~~ELEEEEEECTION TIME~~~~~~~~~~~~~~~~
-	    if ( yearsPlayed%6 == 0 ) {
-		int percentSupport =  playerState.popularity( votesOnBills, finishedLegislation );
-		if (percentSupport < 0) {
-		    System.out.println("Well it seems your nearly criminal actions have caught up to you, your repeated support of multiple questionable bills has been noticed by several large media organizations. Well, they love a good story and guess who is the new Lucifer of the Hill. The people are fine electing a scumbag as long as their is no evidence, and they can lie to themselves they elected someone who will help the country. Well, with the evidence on every major cable network your ratings plummted to negative levels (who even knew this was possible?) and you have been promptly impeached from office.");
-		    elected = false;
-		}
-		else if (percentSupport > 50) {
-		    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
-		}
-		else {
-		    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " + percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
-		    elected = false;
-		}
-	    } 	   
-
-		
+	    if(yearsPlayed%6==0){
+		elected = electionTime(playerState, finishedLegislation, votesOnBills ); 	   
+	    }
+	    
 	}//end while(elected)
 	
 	System.out.println("So your journey has come to an end fair Senator. Thou hast had a good run, doing much in the way of helping one's home state and the world...maybe...or just enjoying all the free stuff, oak panelling, and comfy office chairs your daring appearence granted you. Thinking back you realize you won't miss it much, yes it was semi-not-really enjoyable, but to be honest it did not pay that great. Also the politics seemed to make no sense, it was like everyone voted on capricious whims based on established convictions with no basis in fact....hmm actually looking back US politics is horrible, its great to be out. Now you get to make the real money as a...LOBBYIST!!! ....So another journey begins."); 
 	/*=============================
-=================================*/
+	  =================================*/
     }//end main
 }//end driver

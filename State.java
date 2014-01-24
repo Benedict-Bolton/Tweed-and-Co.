@@ -92,7 +92,7 @@ public class State extends Others{
 
     //indicates the State's happiness with a Player parameter
     //returns an int that is popularity in percent
-    public int popularity( ArrayList<String[]> votesOnBills, ArrayList<Legislation> legis) {
+    public int popularity(  ArrayList<Legislation> legis, ArrayList<String[]> votesOnBills) {
 	int percentSupport = 0;
 	int countOfCorruption = 0;
 	for (Legislation l: legis) {
