@@ -73,14 +73,17 @@ public class Driver {
 	int percentSupport =  playerState.popularity(l,s);
 	if (percentSupport < 0) {
 	    System.out.println("Well it seems your nearly criminal actions have caught up to you, your repeated support of multiple questionable bills has been noticed by several large media organizations. Well, they love a good story and guess who is the new Lucifer of the Hill. The people are fine electing a scumbag as long as their is no evidence, and they can lie to themselves they elected someone who will help the country. Well, with the evidence on every major cable network your ratings plummted to negative levels (who even knew this was possible?) and you have been promptly impeached from office.");
+	    delay();
 	    return false;
 	}
 	else if (percentSupport > 50) {
 	    System.out.println("You have successfully followed the demands of partisan politics in the US and have gained the support of " + percentSupport + "% of the voters in your home State. This has secured you your relection, and most importantly means your super comfy office chair will be yours for another six years.");
+	    delay();
 	    return true;
 	}
 	else {
 	    System.out.println("Whatever you tried to do, you did wrong. Maybe you tried to be all nice and bipartisan, or perhaps you decided to be the maverick that changed the opinions of their state to what was actually beneficial for the state. Regadless it seems you have faced the harsh reality of politics that you are a slave to the people, every single stubborn one of them, and apparently you were a bad slave with only " + percentSupport + "% of your home state voting to reinstate you. Well, you failed to get relected and you're out of a job. Just make sure to swipe all the office supplies and confidential documents you can before you leave!");
+	    delay();
 	    return false;
 	}
     }
