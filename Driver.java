@@ -173,8 +173,8 @@ public class Driver {
 	whatever = Keyboard.readString();
 	=================================*/
 	
-	double worldStability = 0; //higher lowers all financial indicators of public, keep it down,
-	//passing too much of one kind of legislation aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
+	double worldStability = 0; //higher lowers all financial indicators of public, keep it down, also instabilitt is just bad morally...you have those right I hope?
+	//passing too much of one kind of event option aggravates it. Yet, your party will always want you to pass more of the same. Range [0, 50]
 	
 	//***PHASING OUT WORLD STABILITY EFFECTS IN ORDER TO GET THIS THING OUT THE DOOR ASAP***
 	//***hopefully we can work on it later***
