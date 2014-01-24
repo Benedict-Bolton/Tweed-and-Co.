@@ -174,6 +174,7 @@ LOG OF NON-CORRUPTION RELATED TRANSACTIONS
 		--Republican, trickle-down, socially conservative bills not popular in Democratic states
 	   popularity() in State trying to accomplish the same thing as legisAchievement() in Player:
 		--we decided to go with popularity() in State
+		--since Driver already contained an ArrayList<Legislation> for finished legislations and an ArrayList<String> for the player's votes
 
 2014-1-23: added javadocs comments [Ben]
 	   polished Driver up by including more delay() [Shahruz]
@@ -183,5 +184,39 @@ LOG OF NON-CORRUPTION RELATED TRANSACTIONS
 	   compartmentalized the election mechanism into a separate function in Driver [Shahruz]
 	   added ASCII art to the election mechanism of the American flag, Uncle Sam to get that patriotic vibe [Shahruz]
 	   general touch-ups prior to alpha release [Shahruz]
-============================================================================
-		--since Driver already contained an ArrayList<Legislation> for finished legislations and an ArrayList<String> for the player's votes
+====================================================================================
+Obstacles Overcome
+
+====================================================================================
+Unresolved Issues
+
+There are many aspects to this simulator that we started out with that we didn't get to incorporate into the final version.
+We originally envisioned a much wider world-simulator, with the political demographics of the nation changing every few
+years or so as each party rose in one place. Having this fluctuation in the player's own state would make for more challenging
+gameplay. The player would have to respond to the new political trends, not just sticking with the same old schtick.
+
+In addition, our code was not written in the most organized manner. As we went along, we found we needed methods
+here or there that we found a way around using later. So we kind of picked up things that aren't all completely utilized
+in the final version. There was lots of commenting-out happening during this project as we experimented with what worked.
+
+Another issue is that the number-crunching in some of our functions, specifically popularity() in the State class, is still
+wonky. It took a couple of days just to troubleshoot the number-crunching problems in other functions. The problem has to
+stem from the complexity of the task. There are so many variables that we take into account when calculating support
+for a politician or for a legislation that it's no wonder something somewhere along the line is off-center.
+====================================================================================
+Cool Things Learned
+
+Shahruz--I decided to incorporate try-catch Exception handling into this project. Luckily I only tested it on one method 
+	because it was a 2-hour hassle. Trying to understand the syntax from the textbook and internet resources was the hardest
+	part. Conceptually it's very simple, but it's aways the specificity of the syntax that gets me. It was a useful
+	exercise in learning flow-control, because the compiler's "no-go" error messages prompted me to go back and trace
+	through my code to see what exactly was going on.
+
+
+====================================================================================
+Mid-Developmental Design Changes (and why)
+
+====================================================================================
+Lesson Learned 
+
+1. Aim small. Place the expectations bar low. That way you'll be sure to acheive it. Then see where you can go from there.
