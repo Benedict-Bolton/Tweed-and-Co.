@@ -85,6 +85,27 @@ public class Driver {
 	}
     }
 
+    //replaces the delay() method in certain situations
+    //lets the player refer back to the stats of the senate and their homeState to facilitate informed decision-making
+    public static void playerChoose(Senate senate, Player player, State playerState){
+	System.out.println("======================================");
+	String s = "What would you like to do? Enter the number of your choice";
+	s+="\n\t1. check the Senate (my bros)";
+	s+="\n\t2. check my home state (my plebians)";
+	s+="\n\t3. continue legislating...from my Awesome Comfy Chair!!!";
+	System.out.println(s);
+	int choice = Keyboard.readInt();
+	if (choice == 1) {
+	    System.out.println(senate);
+	    delay();
+	}
+	else if (choice == 2){
+	    System.out.println(playerState);
+	    delay();
+	}
+	else if (choice == 3){}//do nothing
+    }
+
 
     public static void main( String[] args ) {
 	int year = 1996;
@@ -161,7 +182,7 @@ public class Driver {
 		String whoDelay = "No One"; // "No One" for when no one is delaying the bill, "You" for when you are delaying a bill, "Opposition" when the opposition to your vote of passing is delaying the vote, "Fail" you have attempted to delay too long and have failed, "Success" the opposition has failed in its delay tactics
 		System.out.println(freshBill);
 		//System.out.println("Current Senate support for this bill: "+senate.voteLegis(freshBill)+"%"); are we sure we want this, would it be better for the player to have to discover it all?
-		delay();
+		playerChoose(senate, player, playerState);
 		if (powerSource == 0) {
 		    powerName = "Magnificent Hair";
 		    System.out.println("\n\n All the other Senators stare at that perfectly HAIRSPRAYED head of yours and stand in utter awe. \n Your perfect hair has given you Power over some of the other Senators votes, it is time to use the great power of hair products to cast your vote to attempt to determine the fate of this bill.\n\n");
@@ -183,11 +204,11 @@ public class Driver {
 		    System.out.print("Would you like to Vote 'For' or 'Against' this Bill?\nYou can also attempt to delay it forever with either a 'Filibuster', 'Amendments', or 'Both' if you do not think you have the votes to stop this bill on its own:\n"); 
 		    String vote = Keyboard.readString();
 		    if (vote.equals("Both")) {
-			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); delay();
+			System.out.println("Your tactic has been successful, the supporters of this bill have given up and it is to forever sit in the archives of never-voted-on Senate Bills"); playerChoose(senate, player, playerState);
 			passageBill = 3;
 			legislationActive = false;
-			System.out.println(finishedLegislation.add(freshBill) );
-			System.out.println("***DIAG a--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println(finishedLegislation.add(freshBill) );
+			//System.out.println("***DIAG a--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
@@ -197,15 +218,15 @@ public class Driver {
 			continue; 
 		    }
 		    else if (vote.equals("Amendments") || vote.equals("Filibuster") ) {
-			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill");delay();
+			System.out.println("Your attempt to delay the bill into eternity has failed, the other Senators have rejected these obstructionist tactics and are proceeding with the vote on the bill"); delay();
 		    }
 		    double support = senate.voteLegis(freshBill,vote,player);
 		    System.out.println("\n\n The percent of the Senate that voted for this bill was " + (support*100) + "%");
 		    if (support <= 0.5) {
 			System.out.println("It seems this bill has failed, despite the support some had for it");
 			passageBill = 2;
-			System.out.println(finishedLegislation.add(freshBill) );
-			System.out.println("***DIAG b--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println(finishedLegislation.add(freshBill) );
+			//System.out.println("***DIAG b--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
@@ -218,8 +239,8 @@ public class Driver {
 		    else if (support > 0.5) {
 			System.out.println("It seems this bill has passed, its supporters have triumphed over the resistant minority");
 			passageBill = 1;
-			System.out.println(finishedLegislation.add(freshBill) );
-			System.out.println("***DIAG c--finishedLegislation.size()*** "+finishedLegislation.size());
+			//System.out.println(finishedLegislation.add(freshBill) );
+			//System.out.println("***DIAG c--finishedLegislation.size()*** "+finishedLegislation.size());
 			//System.out.println("***DIAG c--finishedLegislation*** "+finishedLegislation);
 			String[] votesBill = new String[3];
 			votesBill[0] = ""+year;
@@ -230,9 +251,9 @@ public class Driver {
 
 		    }
 		}
-		delay();
+		playerChoose(senate, player, playerState);
 		if ( ( (passageBill == 4) || (passageBill == 5) || (passageBill == 9) ) && (whoDelay == "You") ) {
-		    System.out.print("You are are successfully deleying the passage of the bill, yet the opposition has not yet given up and let the bill die. They are matching you inch for inch in this battle of wills. You can 'Continue' to attempt to delay the bill further and hope the opposition surrenders, yet this continued obstructionism can have many dangerous effects, you may want to 'Surrender' and let the bill pass:"); delay();
+		    System.out.print("You are are successfully deleying the passage of the bill, yet the opposition has not yet given up and let the bill die. They are matching you inch for inch in this battle of wills. You can 'Continue' to attempt to delay the bill further and hope the opposition surrenders, yet this continued obstructionism can have many dangerous effects, you may want to 'Surrender' and let the bill pass:"); playerChoose(senate, player, playerState);
 			String tactic = Keyboard.readString();
 		}
 

@@ -8,7 +8,7 @@ public class Legislation {
 
     //all possible bill texts
     //8 attributes for each bill == text, econType, socType, forType, proposer, PorkBarrel, selfEnrichment, gerrymandering;
-    private final int[][] POS_BILLS = { {0, 1, 0, 0, 0, -1, 0, 1}, {1, 0, 0, 0, 0, 0, -1, 2}, {2, 0, 0, 0, 0, 0, -1, 2}, {3, 0, 0, 0, 0, -1, 1, 2}, {4, 1, 0, 0, 0, -1, 0, 1}, {5, 2, 0, 0, 0, -1, 2, 2}, {6, 1, 0, 0, 0, -1, 0, -1}, {7, 2, 0, 0, 0, 1, -1, -1}, {8, 0, 0, 0, 0, 0, -1, 2}, {9, 1, 0, 0, 0, 2, -1, 1}, {10, 0, 0, 0, 0, -1, 1, 2}, {11, 1, 0, 0, 0, 1, -1, 1}, {12, 0, 0, 0, 0, 2, 2, 2}, {13, 1, 0, 0, 0, -1, 0, 1}, {14, 1, 0, 0, 0, 2, 2, 1}, {15, 0, 0, 0, 0, -1, 1, 2}, {16, 2, 0, 0, 0, -1, -1, 0}, {17, 2, 0, 0, 0, -1, 2, 1}, {18, 2, 0, 0, 0, 1, -1, 2}, {19, 0, 0, 0, 0, -1, 1, 2}, {20, 2, 1, 0, 0, -1, -1, -1}, {21, 2, 0, 1, 0, -1, -1, -1}, {22, 2, 1, 0, 0, -1, -1, -1}, {23, 2, 0, 0, 1, -1, -1, -1}, {24, 2, 0, 0, 1, -1, -1, -1} };
+    private final int[][] POS_BILLS = { {0, 1, 0, 0, 0, -1, 0, 1}, {1, 0, 0, 0, 0, 0, -1, 2}, {2, 0, 0, 0, 0, 0, -1, 2}, {3, 0, 0, 0, 0, -1, 1, 2}, {4, 1, 0, 0, 0, -1, 0, 1}, {5, 2, 0, 0, 0, -1, 2, 2}, {6, 1, 0, 0, 0, -1, 0, 1}, {7, 2, 0, 0, 0, 1, -1, -1}, {8, 0, 0, 0, 0, 0, -1, 2}, {9, 1, 0, 0, 0, 2, -1, 1}, {10, 0, 0, 0, 0, -1, 1, 2}, {11, 1, 0, 0, 0, 1, -1, 1}, {12, 0, 0, 0, 0, 2, 2, 2}, {13, 1, 0, 0, 0, -1, 0, 1}, {14, 1, 0, 0, 0, 2, 2, 1}, {15, 0, 0, 0, 0, -1, 1, 2}, {16, 2, 0, 0, 0, -1, -1, 0}, {17, 2, 0, 0, 0, -1, 2, 1}, {18, 2, 0, 0, 0, 1, -1, 2}, {19, 0, 0, 0, 0, -1, 1, 2}, {20, 2, 1, 0, 0, -1, -1, -1}, {21, 2, 0, 1, 0, -1, -1, -1}, {22, 2, 1, 0, 0, -1, -1, -1}, {23, 2, 0, 0, 1, -1, -1, -1}, {24, 2, 0, 0, 1, -1, -1, -1} };
     private final String[] TEXT_REFERENCE = new String[25];
 
     private int propParty; //1 = demo, 0 = repub, 2 = bipartisan
@@ -67,13 +67,15 @@ public class Legislation {
 	if (foreignType == 0) { ans += "Interventionalism"; }
 	else if (foreignType == 1) { ans += "Internationalism"; }
 	else if (foreignType == 2){ ans += "Isolationism"; }
-	else {ans += "This Bill is largely independant of any Foreign Policy Ideology";}
+	else {//ans += "This Bill is largely independant of any Foreign Policy Ideology";
+	    ans+="None";}
 	ans += "\n";
 	ans += "Economic Policy Pursued by the Bill: ";
 	if (economicsType == 0) { ans += "Populism"; }
 	else if (economicsType == 1) { ans += "Supply-Side Economics"; }
 	else if (economicsType == 2) { ans += "Modernization"; }
-	else {ans += "This Bill is largely independant of any defined Economic Policy";}
+	else {//ans += "This Bill is largely independant of any defined Economic Policy";
+	    ans+="None";}
 	ans += "\n";
 	ans += "Overall this bill might be deemed by society as: ";
 	if (socialType == 0) { ans += "Libertarian"; }

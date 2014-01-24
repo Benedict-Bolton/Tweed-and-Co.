@@ -45,7 +45,7 @@ public class Legislation {
     //overriding the good ole' to String (faster than writing out the designations for each bill
     public String toString () {
 	String ans = "";
-	ans += "Text of Legislation -- " + text + "\n";
+	ans += "Text of Legislation -- " + text + "\n======================================\n";
 	ans += "Party that Proposed the Legislation: ";
 	if (propParty == 0) { ans += "Republicans"; }
 	else if (propParty == 1) { ans += "Democrats"; }
