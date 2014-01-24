@@ -1,5 +1,6 @@
-/** Class Description of Event
- * @author Benedict Bolton & Shahruz Ghaemi*/
+/** Foreign Crisis and Events that will necessitate a response from the player
+ * @author Benedict Bolton and Shahruz Ghaemi
+ */
 public class Event{
     
     /** EVENTS is a constant 2-D array of all possible event that can be generated, in each row is the response options that come with the text of the event*/
@@ -15,7 +16,6 @@ public class Event{
     /**
      * Event(String) contructs Event objects, of _type type. The _options and _text are randomly choosen from _EVENTS
      * @param type This is String which defines the type of Event that is to be created, it may be either , letter for letter, Domestic or Foreign
-     * @return this has no return as it is a constructor
      */
     public Event(String type) {
 	initializeEvents();
@@ -31,7 +31,7 @@ public class Event{
     
     /**
      * toString() customizes the string output of the Event object
-     * @return Returns first the _text of the Event after a slight introductory string, tehn teh options are returned numerically from least to greatest
+     * @return Returns first the _text of the Event after a slight introductory string, then the options are returned numerically from least to greatest
      */
     public String toString() {
 	String ans = "";
@@ -49,7 +49,7 @@ public class Event{
     /**
      * changeResult(State, double, int) generates the chnages that should occur to the input double worldStable and State usa, based upon the int choice the user has made. The choice represents which of an events option the user choose, with the int corresponding to the option's index.
      * 
-     * @param usa The homeState of the player who is responding to the events, must not be null
+     * @param usa The State object of the player who is responding to the events, must not be null
      * @param worldStable A double representing the worldStability variable within Driver.java, range == [0.0, 50.0]
      * @param choice int representing the index of the user's choice of response within _options instance variable
      * 
@@ -82,7 +82,9 @@ public class Event{
     }
 
 
-	
+    /**
+     * initializeEvents() populates the EVENT 2-D array with the possibilities for _text and _options[] that may be chosen.
+     */ 
     public void initializeEvents () {
 	EVENTS[0][0] = "Central Asia is again having issues of oppression and murder it seems, I suppose it is Tuesday after all. The Tajik majority in Tajikistan is forcing the migration of minority Uzbek's into camps outside the cities, these camps have very few facilities and many who are sick or injured are dying in the process. While the US can intervene and save lives, the US can also save a lot of money by being granted free access for military supplies through Tajikistan's strategically important roads.";
 	//repsonses
@@ -125,8 +127,10 @@ public class Event{
 
 
     }
-    //try and add two or three more by friday Benedict
     
+    /**
+     * main(String[] args) tests the methods within the array by printing and constructing an Event object of type "Foreign"
+     */
     public static void main (String[] args) {
 	Event test = new Event("Foreign");
 	System.out.println(test);
