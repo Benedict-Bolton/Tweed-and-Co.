@@ -92,18 +92,18 @@ public class State extends Others{
 
     //indicates the State's happiness with a Player parameter
     //returns an int that is popularity in percent
-    public int popularity( ArrayList<String> votesOnBills, ArrayList<Legislation> legis) {
+    public int popularity(  ArrayList<Legislation> legis, ArrayList<String[]> votesOnBills) {
 	int percentSupport = 0;
 	int countOfCorruption = 0;
-	for (Legislation currentLegislation: legis) {
-	    if ( (currentLegislation.getGerry() == 1) || (currentLegislation.getSelf() == 1) || (currentLegislation.getPork() == 1) ) {
+	for (Legislation l: legis) {
+	    if ( (l.getGerry() == 1) || (l.getSelf() == 1) || (l.getPork() == 1) ) {
 		countOfCorruption += 1;
 	    }
 	}
 	for (int c = legis.size() - 3; c < legis.size(); c++) {
 	    Legislation checking = legis.get(c);
-	    boolean[] matchesParty = [5];
-	    if (_percentCompRight > _percentCompLeft) {
+	    boolean[] matchesParty = new boolean[5];
+	    if ( getCompRight() > getCompLeft() ) {
 		if (checking.getSoc() == 2) {
 		    matchesParty[4] = true;
 		}
@@ -113,14 +113,14 @@ public class State extends Others{
 		if (checking.getForeign() == 0) {
 		    matchesParty[2] = true;
 		}
-		if (checking.propParty() == 0) {
+		if (checking.getProp() == 0) {
 		    matchesParty[0] = true;
 		}
-		if  ( (currentLegislation.getGerry() == 1) || (currentLegislation.getSelf() == 1) || (currentLegislation.getPork() == 1) ) {
+		if  ( (checking.getGerry() == 1) || (checking.getSelf() == 1) || (checking.getPork() == 1) ) {
 		    matchesParty[1] = true;
 		}
 	    }
-	    if (_percentCompLeft > _percentCompRight) {
+	    if ( getCompLeft() > getCompRight() ) {
 		if (checking.getSoc() == 1) {
 		    matchesParty[4] = true;
 		}
@@ -130,10 +130,10 @@ public class State extends Others{
 		if (checking.getForeign() == 2) {
 		    matchesParty[2] = true;
 		}
-		if (checking.propParty() == 1) {
+		if (checking.getProp() == 1) {
 		    matchesParty[0] = true;
 		}
-		if  ( (currentLegislation.getGerry() == 1) || (currentLegislation.getSelf() == 1) || (currentLegislation.getPork() == 1) ) {
+		if  ( (checking.getGerry() == 1) || (checking.getSelf() == 1) || (checking.getPork() == 1) ) {
 		    matchesParty[1] = true;
 		}
 	    }
@@ -163,6 +163,7 @@ public class State extends Others{
 		else {
 		    percentSupport -= 10;
 		}
+	    }
 	    if (matchesParty[2] || matchesParty[3]) {
 		if ( (votesOnBills.get(c))[1].equals("For") ) {
 		    percentSupport += 10;
@@ -184,6 +185,7 @@ public class State extends Others{
 		else {
 		    percentSupport -= 10;
 		}		
+	    }
 	}
 	if (percentSupport < 0) {
 	    percentSupport = 0;
@@ -191,10 +193,11 @@ public class State extends Others{
 	if (countOfCorruption >= 4) {
 	    percentSupport -= 101;
 	}
+	
 	return percentSupport;
     }
-
-    //returns the majority party in this state
+	
+    //~~~~~~~~~~~~~~~~~returns the majority party in this state~~~~~~~~~~~~~~~~~~~
     //0=republicans, 1=democrats
     public int getMajority(){
 	if(getCompRight() > 0.5){return 0;}
@@ -202,7 +205,7 @@ public class State extends Others{
 	else{return (int)(Math.random()*2.0);}
     }
 
-    //returns the name of this state
+    //~~~~~~~~~~~~~~~~~~returns the name of this state~~~~~~~~~~~~~~~~~~~~~~~~
     public String getName(){
 	return _stateName;
     }
