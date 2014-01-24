@@ -1,4 +1,3 @@
-
 ==========================================================================
 DEVELOPMENT LOG
 A project by: Benedict Bolton, Shahruz Ghaemi
@@ -187,6 +186,33 @@ LOG OF NON-CORRUPTION RELATED TRANSACTIONS
 ====================================================================================
 Obstacles Overcome
 
+Interaction between many different classes in all significant methods, made effective testing difficult for us. Much work
+had to be completed before the tests were run. Yet, by pushing through the coding and prioritizing and communicating
+constantly what each other thought should be added to the repo next, we were able to develop effeciently enough that 
+with relatively small delays we could see whether our classes we working once the other person had completed their work for
+that day.
+
+Learning error Hangdling and javadocs. We knew neither of these in the slightest at the start of the project, well we knew
+a little bit of error handling, but our team thought javadocs was file I/O a the start. We had to become familiar with these
+concepts by the end so we could have any hope of putting some strech in our project. But, by going through the textbook,
+and/or taking abundant advantage of the Oracle tutorials and documentation availalble online.
+
+Proper and relatively clean storage of all the data we needed to check to run Driver.java. We initially had issues 
+figuring out how exactly we were to store data with multiple dimensions to and possibilites, or had simple more standard
+2-D array structure yet needed to be of a possibly unlimited size. We handled this by tracing out exactly what was being 
+stored on lined paper, and from that we were able to visualize the shape of the data holding structure needed, and from 
+that is was easy to initialize them. Then we looked at what we were filling these structure with on paper, it was simple 
+to realize how to set up ints within them to serve the purposes of all the options we needed to have available for storage.
+
+The biggest obstacle in the whole development was beating the ever-ticking clock we had counting down on us. One, good 
+communication between Benedict and Shahruz greatly spread up the process, despite the excessive delays that were prevalent
+thanks to the nature of the past two weeks. What helped the most in avoiding utter ruin from this obstacle was focusing on
+getting down the idea of what were trying to acheive in each class, rather than fixing all the picky details. We cut back
+on the time figgiting with numbers, or creating too much printed text, that while it helped the game slowed down the 
+production of good code. These two factors, with a healthy dose of sleep deprivation, helped us surmount the obstalce, 
+and ultimately all associated with the dreaded time crunch, and actually finish the project, woot!
+
+
 ====================================================================================
 Unresolved Issues
 
@@ -203,6 +229,11 @@ Another issue is that the number-crunching in some of our functions, specificall
 wonky. It took a couple of days just to troubleshoot the number-crunching problems in other functions. The problem has to
 stem from the complexity of the task. There are so many variables that we take into account when calculating support
 for a politician or for a legislation that it's no wonder something somewhere along the line is off-center.
+
+Another issue that came up is having ensuring all the variables have equal weights that incentivizes the user to respond
+thoughtfully to the effects that could result from them. Yet, partly due to the afformentioned issues, as well as the 
+unexpected time it took to try and even balance a few variables, getting all the variables and actions in balance as they
+would be in a normal game continously eluded us.
 ====================================================================================
 Cool Things Learned
 
@@ -212,11 +243,83 @@ Shahruz--I decided to incorporate try-catch Exception handling into this project
 	exercise in learning flow-control, because the compiler's "no-go" error messages prompted me to go back and trace
 	through my code to see what exactly was going on.
 
+Benedict--I decided to incorporate javadocs comments into our code for this porject. It certainly was very time consuming
+	to carry out at times, but what was particularly striking was how much clearer the code was afterwards, with the
+	purpose of the methods apparent instantly. We are often told we need to comment our code, but I feel as though few 
+	people do as they rarely are working with enough people, or with a complicated enough project, to make the commenting
+	a requirement to understanding. Yet, in doing the Javadocs, it was cool to learn how comments could be applied in a
+	standard format to make even the most convoluted code easily readable. I also came to appreciate a bit more of the 
+	power of coding from javadocs, as last year there was a ton of hard-coding we had to do for some html projects. In javadocs
+	I could take only a few lines of code, run it through javadocs, and I have 1000s of bytes of html ready to go; something
+	that I did not know was possible before.
+	
+All Together Now!-- We both came to understand github better. Particularly in how it merges code during push and pull calls,
+	and the convenience from this. We also learned how to force github to cooperate with fetch and reset commands.
+
 
 ====================================================================================
 Mid-Developmental Design Changes (and why)
+
+Part of the way through the development of the project we realized that there were multiple aspects of the project, that 
+simply due to time constraints we would not have time to implemnt. These included the Public class, the worldStability 
+variable, the changing political climate in State classes, effects from Legislation on variables outside elections, 
+election dynamics, and more balance voting and election functions.
+
+The Public class was unable to be implemented mainly out of time constraints. It would have required balancing the 
+voteLegislation() method, as well as the election method. It also would have created the necessity of writing at least
+3 more major methods to allow for interaction between State Public which we simply did not have time to do. The 
+issue of a lack of substantial implementation for worldStability is it would have had an effect mainly on the Public as
+a whole. Yet, with the lack of a Public class, the implementation jumped in complexity and planning, which we simply ran
+out of time to do. Finally, the issue of creating a more balanced, in terms of game theory, voteLegislation() and 
+popularity() methods ran into the same issue. While we could get them functional, it would have required a lot of pure 
+number crunching on our side to see what the desired modifiers and interactions between multiple input variables should be.
+We simply were not able to accomplish this in time, and hence these methods were pulled back to varying degrees to accomodate.
+
+Greater election dynamics, such as fundraising, as it become mostly irrelavent when mid-development we dropped a good deal
+of the changing electoral environment plans. This made having the dynamics much less useful, and far more of a way to trick 
+the game. Thus, other dynamics were prioritized. Then to move onto why the changing electoral climate was not implemented, 
+mainly has to do with the lack of more dynamic effects from Legislation. These changes would have been required to actuallu
+motivate some change in the elections. Yet, the reason for the lack of dynamic effects was the huge amount of text that would 
+have needed to go into making it presentable. The Legislation texts and numbers took a while on its own, because that work was very time 
+consuming. There would have been little real functionality payoff for quite a while if I had attempted to develop and write all 
+the outcomes that would have to occur, hence it was scrapped in favor of other work that could yeild better benefits in the time alloted.
+
 
 ====================================================================================
 Lesson Learned 
 
 1. Aim small. Place the expectations bar low. That way you'll be sure to acheive it. Then see where you can go from there.
+
+2. Do not choose a project or task and then plan it out with loop sketches and UML diagrams. The UML and trace diagrams 
+should come first, before topic of project is settled on so reachable goals are choosen.
+
+3. Focus first on the largest, most complicated methods within a class, then add instance variables and methods as 
+they are needed to make the code work, so there is not a huge sprawl of potentially needed variables and methods before
+the major work is even done.
+
+4. As methods are completed a dummy Class for testing them should be expanded. The dummy class should not be made at test
+time when one is distracted, but during development of a class so it is there when the class is finished. This way
+no other class needs to be finished for testing to occur.
+
+5. Start with basic functionality, the logic or commands need not be clear nor effecient. Once the basic logic that forms 
+the fondation of the method's functionality is completed, should one even begin to think about adding complexity, simplicity,
+balance, and efficiency.
+
+6. Create a clear class development schedule for assigning work. Instead of going to issues as they arise, or assigning 
+classes to write in chunks. Instead determine which class relies the least on all other classes, then the 2nd least,
+and so on and assign them based on this order. 
+
+7. Keep a journal of changes with dates.
+
+8. Be wary of printed text, it can be a very time intensive and consuming rabbit hole, that does npt produce much solid 
+code at the end.
+
+9. Modularize the development of large methods. Break it down into simple conditionals or iterative loops that can be 
+taken easily on their own, and when added together easily create what is desired.
+
+10. Create a standard structure for your comments, and consistently apply it to everything that is instantiated as you go
+in this structure. Sacrifice the time to write the comments then, as it will save much time later when code can be clearly
+read and understand, fascilitating collaboration.
+
+11. Build small, build simple, build succintly. Think all that too. This will make a solid fondation, and from there the
+code can blossum out into the complicated program you desire it to be, without falling from its own staggering size.
